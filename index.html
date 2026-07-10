@@ -14,49 +14,44 @@
             --light: #FAFAFA;
             --darkText: #2D3748;
         }
-        body, html {
+        body {
             margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            overflow: hidden !important;
             background-color: var(--light);
             color: var(--darkText);
             font-family: 'Montserrat', sans-serif;
-            display: flex;
-            flex-direction: column;
         }
         h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
 
         header {
+            position: fixed; top: 0; left: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem; background: var(--light); z-index: 50; position: relative;
-        }
-
-        #main-content {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
+            padding: 1.2rem 1.5rem; background: var(--light); z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            box-sizing: border-box;
         }
 
         .page-section {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s;
-            overflow-y: auto;
-            padding-bottom: 80px;
+            display: none; 
+            padding: 6rem 1.5rem 5rem 1.5rem; /* Spazio per l'header e per il footer fisso */
+            min-height: 100vh;
+            box-sizing: border-box;
         }
         .page-section.active {
-            opacity: 1; visibility: visible; z-index: 10;
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        #global-footer {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%;
+        /* FOOTER FISSO COME RICHIESTO */
+        #fixed-footer {
+            position: fixed; bottom: 0; left: 0; width: 100%;
             background: var(--light);
-            border-top: 1px solid #eee;
+            border-top: 1px solid #eaeaea;
             padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 40;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+            box-sizing: border-box;
         }
         .footer-socials a { color: var(--darkText); font-size: 1.2rem; margin-left: 1rem; transition: color 0.3s; }
         .footer-socials a:hover { color: var(--sage); }
@@ -64,7 +59,7 @@
         #menu-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(250, 250, 250, 0.98);
-            z-index: 100;
+            z-index: 2000;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             opacity: 0; visibility: hidden; transition: 0.3s ease;
         }
@@ -73,12 +68,12 @@
         .menu-item:hover { color: var(--sage); }
         #close-menu { position: absolute; top: 1.5rem; left: 1.5rem; font-size: 2rem; cursor: pointer; }
 
-        .lang-dropdown { position: absolute; top: 4rem; right: 1.5rem; background: #222; color: #fff; border-radius: 8px; padding: 0.5rem; display: none; flex-direction: column; z-index: 60; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .lang-dropdown { position: absolute; top: 3.5rem; right: 1.5rem; background: #222; color: #fff; border-radius: 8px; padding: 0.5rem; display: none; flex-direction: column; z-index: 1500; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .lang-dropdown.open { display: flex; }
         .lang-option { padding: 0.5rem 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
         .lang-option:hover { background: #333; border-radius: 4px; }
 
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1rem; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1rem 0; }
         .portfolio-item { position: relative; overflow: hidden; border-radius: 8px; height: 350px; cursor: pointer; }
         .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .portfolio-overlay {
@@ -93,7 +88,7 @@
 
         #offer-popup {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 200;
+            background: rgba(0,0,0,0.6); z-index: 3000;
             display: flex; align-items: center; justify-content: center;
             opacity: 0; visibility: hidden; transition: 0.3s ease;
         }
@@ -101,7 +96,7 @@
         .popup-content { background: white; padding: 2.5rem; border-radius: 12px; text-align: center; max-width: 90%; width: 400px; position: relative; }
         .close-popup { position: absolute; top: 1rem; right: 1rem; cursor: pointer; font-size: 1.5rem; }
 
-        .btn { display: inline-block; background: var(--sage); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 500; transition: 0.3s; margin-top: 1rem; }
+        .btn { display: inline-block; background: var(--sage); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 500; transition: 0.3s; margin-top: 1rem; cursor: pointer; border: none; }
         .btn:hover { background: #6b7d73; }
     </style>
 </head>
@@ -130,102 +125,132 @@
         <div class="menu-item" onclick="navTo('about')" data-tr="menu_about">Chi Siamo</div>
         <div class="menu-item" onclick="navTo('treatments')" data-tr="menu_treatments">Trattamenti</div>
         <div class="menu-item" onclick="navTo('portfolio')" data-tr="menu_portfolio">I Nostri Lavori</div>
+        <div class="menu-item" onclick="navTo('booking')" data-tr="menu_booking">Prenota</div>
         <div class="menu-item" onclick="navTo('location')" data-tr="menu_location">Dove Siamo</div>
         <div class="menu-item" onclick="openPopup()" data-tr="menu_offer" style="color: var(--sage);">Locandina Offerta</div>
     </div>
 
-    <div id="main-content">
-        <div id="home" class="page-section active" style="text-align: center; padding: 2rem 1.5rem;">
-            <h1 class="serif" style="font-size: 2.5rem; color: var(--sage); margin-top: 2rem;" data-tr="home_title">La tua Oasi di Benessere</h1>
-            <p style="margin-top: 1rem; color: #666; font-size: 1.1rem;" data-tr="home_sub">Ritrova il tuo equilibrio naturale.</p>
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Spa" style="width: 100%; border-radius: 12px; margin-top: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+    <!-- SEZIONE 1: HOME -->
+    <div id="home" class="page-section active" style="text-align: center;">
+        <h1 class="serif" style="font-size: 2.5rem; color: var(--sage); margin-top: 2rem;" data-tr="home_title">La tua Oasi di Benessere</h1>
+        <p style="margin-top: 1rem; color: #666; font-size: 1.1rem;" data-tr="home_sub">Ritrova il tuo equilibrio naturale.</p>
+        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Spa" style="width: 100%; border-radius: 12px; margin-top: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+        <br>
+        <a href="https://wa.me/393756330365" class="btn" data-tr="book_now">Prenota via WhatsApp</a>
+    </div>
+
+    <!-- SEZIONE 2: CHI SIAMO -->
+    <div id="about" class="page-section">
+        <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center;" data-tr="about_title">Chi Siamo</h1>
+        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cabina Trattamenti" style="width: 100%; border-radius: 12px; margin: 1.5rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+        
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+            <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem;">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Annamaria Vitaliti" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h3 class="serif" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Annamaria Vitaliti</h3>
+            <p style="font-size: 0.9rem; font-style: italic; color: #555;" data-tr="about_quote">"Accolgo i clienti con gentilezza e professionalità per offrire un servizio di prima qualità. La vostra bellezza è la mia passione."</p>
+        </div>
+    </div>
+
+    <!-- SEZIONE 3: TRATTAMENTI -->
+    <div id="treatments" class="page-section">
+        <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center; margin-bottom: 1.5rem;" data-tr="treatments_title">I Nostri Trattamenti</h1>
+        <p style="text-align: center; margin-bottom: 2rem; color: #666;" data-tr="treatments_sub">Utilizziamo solo prodotti di altissima qualità come Selenia e Masterbeauty.</p>
+        
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+            <h3 class="serif" data-tr="treat_1">Cura del Viso</h3>
+            <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_1_desc">Trattamenti anti-age e purificanti avanzati.</p>
+        </div>
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+            <h3 class="serif" data-tr="treat_2">Benessere Corpo</h3>
+            <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_2_desc">Massaggi rilassanti e modellanti.</p>
+        </div>
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+            <h3 class="serif" data-tr="treat_3">Estetica di Base</h3>
+            <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_3_desc">Epilazione, manicure e pedicure curativo.</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
             <a href="https://wa.me/393756330365" class="btn" data-tr="book_now">Prenota via WhatsApp</a>
         </div>
+    </div>
 
-        <div id="about" class="page-section" style="padding: 2rem 1.5rem;">
-            <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center;" data-tr="about_title">Chi Siamo</h1>
-            <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cabina Trattamenti" style="width: 100%; border-radius: 12px; margin: 1.5rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-            
-            <div style="background: white; padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem;">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Annamaria Vitaliti" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h3 class="serif" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Annamaria Vitaliti</h3>
-                <p style="font-size: 0.9rem; font-style: italic; color: #555;" data-tr="about_quote">"Accolgo i clienti con gentilezza e professionalità per offrire un servizio di prima qualità. La vostra bellezza è la mia passione."</p>
-            </div>
-        </div>
-
-        <div id="treatments" class="page-section" style="padding: 2rem 1.5rem;">
-            <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center; margin-bottom: 1.5rem;" data-tr="treatments_title">I Nostri Trattamenti</h1>
-            <p style="text-align: center; margin-bottom: 2rem; color: #666;" data-tr="treatments_sub">Utilizziamo solo prodotti di altissima qualità come Selenia e Masterbeauty.</p>
-            
-            <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-                <h3 class="serif" data-tr="treat_1">Cura del Viso</h3>
-                <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_1_desc">Trattamenti anti-age e purificanti avanzati.</p>
-            </div>
-            <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-                <h3 class="serif" data-tr="treat_2">Benessere Corpo</h3>
-                <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_2_desc">Massaggi rilassanti e modellanti.</p>
-            </div>
-            <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-                <h3 class="serif" data-tr="treat_3">Estetica di Base</h3>
-                <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_3_desc">Epilazione, manicure e pedicure curativo.</p>
-            </div>
-            
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="https://wa.me/393756330365" class="btn" data-tr="book_now">Prenota via WhatsApp</a>
-            </div>
-        </div>
-
-        <div id="portfolio" class="page-section" style="padding: 2rem 1.5rem;">
-            <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center; margin-bottom: 0.5rem;" data-tr="portfolio_title">I Nostri Lavori</h1>
-            <p style="text-align: center; font-size: 0.75rem; color: #999; font-style: italic; margin-bottom: 2rem;" data-tr="portfolio_disclaimer">Le foto presenti sono attualmente a scopo formativo/illustrativo e verranno presto sostituite con i nostri lavori reali.</p>
-            
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Art">
-                    <div class="portfolio-overlay">
-                        <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_1">Nail Art & Manicure</h3>
-                        <div class="portfolio-line"></div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Trattamenti Viso">
-                    <div class="portfolio-overlay">
-                        <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_2">Skincare Avanzata</h3>
-                        <div class="portfolio-line"></div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Massaggi">
-                    <div class="portfolio-overlay">
-                        <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_3">Massaggi Rilassanti</h3>
-                        <div class="portfolio-line"></div>
-                    </div>
+    <!-- SEZIONE 4: PORTFOLIO -->
+    <div id="portfolio" class="page-section">
+        <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center; margin-bottom: 0.5rem;" data-tr="portfolio_title">I Nostri Lavori</h1>
+        <p style="text-align: center; font-size: 0.75rem; color: #999; font-style: italic; margin-bottom: 2rem;" data-tr="portfolio_disclaimer">Le foto presenti sono attualmente a scopo formativo/illustrativo e verranno presto sostituite con i nostri lavori reali.</p>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Art">
+                <div class="portfolio-overlay">
+                    <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_1">Nail Art & Manicure</h3>
+                    <div class="portfolio-line"></div>
                 </div>
             </div>
-        </div>
-
-        <div id="location" class="page-section" style="padding: 2rem 1.5rem; text-align: center;">
-            <h1 class="serif" style="font-size: 2rem; color: var(--sage); margin-bottom: 1.5rem;" data-tr="location_title">Vienici a Trovare</h1>
-            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                <i class="fa-solid fa-location-dot" style="font-size: 2rem; color: var(--sage); margin-bottom: 1rem;"></i>
-                <h3 class="serif" style="font-size: 1.2rem;">Centro Estetico Nanni</h3>
-                <p style="color: #666; margin: 0.5rem 0;">Via dei Pradacci 3, Tradate (VA)</p>
-                <a href="https://maps.google.com/?q=Via+dei+Pradacci+3,+Tradate" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--sage); text-decoration: none; font-weight: 500; margin-top: 0.5rem;" data-tr="open_map">
-                    <i class="fa-solid fa-map"></i> Apri Mappa
-                </a>
-                
-                <div style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
-                    <h4 class="serif" data-tr="hours">Orari</h4>
-                    <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;">Lun - Sab: 09:00 - 19:00<br>Domenica: Chiuso</p>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Trattamenti Viso">
+                <div class="portfolio-overlay">
+                    <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_2">Skincare Avanzata</h3>
+                    <div class="portfolio-line"></div>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Massaggi">
+                <div class="portfolio-overlay">
+                    <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_3">Massaggi Rilassanti</h3>
+                    <div class="portfolio-line"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer id="global-footer">
-        <div style="font-size: 0.8rem; font-weight: 500; color: #555;">
+    <!-- SEZIONE 5: CALENDARIO / PRENOTA -->
+    <div id="booking" class="page-section">
+        <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center;" data-tr="booking_title">Prenota Appuntamento</h1>
+        
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 1.5rem;">
+            <!-- Finto Calendario visivo per il sito dimostrativo -->
+            <div style="height: 300px; border: 1px dashed var(--beige); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--sage); font-family: 'Montserrat', sans-serif;">
+                <p data-tr="calendar_module">[ Modulo Calendario ]</p>
+            </div>
+            
+            <button class="btn" style="width: 100%; margin-top: 1.5rem; font-family: 'Montserrat', sans-serif;" data-tr="confirm_appt">Conferma Appuntamento</button>
+            
+            <div style="display: flex; align-items: center; margin: 1.5rem 0;">
+                <hr style="flex: 1; border: none; border-top: 1px solid #eee;">
+                <span style="padding: 0 1rem; color: #999; font-size: 0.9rem;" data-tr="or">Oppure</span>
+                <hr style="flex: 1; border: none; border-top: 1px solid #eee;">
+            </div>
+            
+            <a href="https://wa.me/393756330365" class="btn" style="background: #25D366; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" data-tr="book_wa">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Prenota via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- SEZIONE 6: DOVE SIAMO -->
+    <div id="location" class="page-section" style="text-align: center;">
+        <h1 class="serif" style="font-size: 2rem; color: var(--sage); margin-bottom: 1.5rem;" data-tr="location_title">Vienici a Trovare</h1>
+        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+            <i class="fa-solid fa-location-dot" style="font-size: 2rem; color: var(--sage); margin-bottom: 1rem;"></i>
+            <h3 class="serif" style="font-size: 1.2rem;">Centro Estetico Nanni</h3>
+            <p style="color: #666; margin: 0.5rem 0;">Via dei Pradacci 3, Tradate (VA)</p>
+            <a href="https://maps.google.com/?q=Via+dei+Pradacci+3,+Tradate" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--sage); text-decoration: none; font-weight: 500; margin-top: 0.5rem;" data-tr="open_map">
+                <i class="fa-solid fa-map"></i> Apri Mappa
+            </a>
+            
+            <div style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                <h4 class="serif" data-tr="hours">Orari</h4>
+                <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;">Lun - Sab: 09:00 - 19:00<br>Domenica: Chiuso</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER SEMPRE VISIBILE -->
+    <footer id="fixed-footer">
+        <div style="font-size: 0.8rem; font-weight: 600; color: var(--sage);">
             @ Centro Estetico Nanni
         </div>
         <div class="footer-socials">
@@ -234,6 +259,7 @@
         </div>
     </footer>
 
+    <!-- POPUP -->
     <div id="offer-popup">
         <div class="popup-content">
             <i class="fa-solid fa-xmark close-popup" onclick="closePopup()"></i>
@@ -248,6 +274,7 @@
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
             toggleMenu(); 
+            window.scrollTo(0, 0);
         }
 
         function toggleMenu() {
@@ -264,7 +291,7 @@
 
         const dict = {
             'it': {
-                'menu_home': 'Home', 'menu_about': 'Chi Siamo', 'menu_treatments': 'Trattamenti', 'menu_portfolio': 'I Nostri Lavori', 'menu_location': 'Dove Siamo', 'menu_offer': 'Locandina Offerta',
+                'menu_home': 'Home', 'menu_about': 'Chi Siamo', 'menu_treatments': 'Trattamenti', 'menu_portfolio': 'I Nostri Lavori', 'menu_booking': 'Prenota', 'menu_location': 'Dove Siamo', 'menu_offer': 'Locandina Offerta',
                 'home_title': 'La tua Oasi di Benessere', 'home_sub': 'Ritrova il tuo equilibrio naturale.', 'book_now': 'Prenota via WhatsApp',
                 'about_title': 'Chi Siamo', 'about_quote': '"Accolgo i clienti con gentilezza e professionalità per offrire un servizio di prima qualità. La vostra bellezza è la mia passione."',
                 'treatments_title': 'I Nostri Trattamenti', 'treatments_sub': 'Utilizziamo solo prodotti di altissima qualità come Selenia e Masterbeauty.',
@@ -273,11 +300,12 @@
                 'treat_3': 'Estetica di Base', 'treat_3_desc': 'Epilazione, manicure e pedicure curativo.',
                 'portfolio_title': 'I Nostri Lavori', 'portfolio_disclaimer': 'Le foto presenti sono attualmente a scopo formativo/illustrativo e verranno presto sostituite con i nostri lavori reali.',
                 'port_1': 'Nail Art & Manicure', 'port_2': 'Skincare Avanzata', 'port_3': 'Massaggi Rilassanti',
+                'booking_title': 'Prenota Appuntamento', 'calendar_module': '[ Modulo Calendario ]', 'confirm_appt': 'Conferma Appuntamento', 'or': 'Oppure', 'book_wa': 'Prenota via WhatsApp',
                 'location_title': 'Vienici a Trovare', 'open_map': 'Apri Mappa', 'hours': 'Orari',
                 'popup_title': 'Offerta Speciale', 'popup_desc': 'Pacchetto Detox Viso & Corpo a un prezzo speciale. Approfittane ora!'
             },
             'en': {
-                'menu_home': 'Home', 'menu_about': 'About Us', 'menu_treatments': 'Treatments', 'menu_portfolio': 'Our Works', 'menu_location': 'Location', 'menu_offer': 'Special Offer',
+                'menu_home': 'Home', 'menu_about': 'About Us', 'menu_treatments': 'Treatments', 'menu_portfolio': 'Our Works', 'menu_booking': 'Book Now', 'menu_location': 'Location', 'menu_offer': 'Special Offer',
                 'home_title': 'Your Wellness Oasis', 'home_sub': 'Find your natural balance.', 'book_now': 'Book via WhatsApp',
                 'about_title': 'About Us', 'about_quote': '"I welcome clients with kindness and professionalism to offer top quality service. Your beauty is my passion."',
                 'treatments_title': 'Our Treatments', 'treatments_sub': 'We use only top quality products like Selenia and Masterbeauty.',
@@ -286,6 +314,7 @@
                 'treat_3': 'Basic Esthetics', 'treat_3_desc': 'Hair removal, healing manicure and pedicure.',
                 'portfolio_title': 'Our Works', 'portfolio_disclaimer': 'The photos shown are currently for illustrative/training purposes and will soon be replaced with our real work.',
                 'port_1': 'Nail Art & Manicure', 'port_2': 'Advanced Skincare', 'port_3': 'Relaxing Massages',
+                'booking_title': 'Book Appointment', 'calendar_module': '[ Calendar Module ]', 'confirm_appt': 'Confirm Appointment', 'or': 'Or', 'book_wa': 'Book via WhatsApp',
                 'location_title': 'Come Visit Us', 'open_map': 'Open Map', 'hours': 'Opening Hours',
                 'popup_title': 'Special Offer', 'popup_desc': 'Detox Face & Body package at a special price. Book now!'
             }
@@ -309,7 +338,7 @@
             });
 
             if (lang === 'en') {
-                setTimeout(openPopup, 500); 
+                setTimeout(openPopup, 600); 
             }
         }
 
