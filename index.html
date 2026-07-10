@@ -3,349 +3,599 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro Estetico Nanni</title>
+    <title>Centro Estetico Nanni | Oasi di Benessere a Tradate</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sage: '#8AA094', 
+                        beige: '#DDC9B4', 
+                        light: '#FAFAFA', 
+                        stone: '#F5F5F4', 
+                        darkText: '#2D3748', 
+                        sageDark: '#6b7d73' 
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        :root {
-            --sage: #8AA094;
-            --beige: #DDC9B4;
-            --light: #FAFAFA;
-            --darkText: #2D3748;
-        }
         body {
-            margin: 0; padding: 0;
-            background-color: var(--light);
-            color: var(--darkText);
-            font-family: 'Montserrat', sans-serif;
+            background-color: #FAFAFA;
+            color: #2D3748;
         }
-        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
-
-        header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 1.5rem; background: var(--light); z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            box-sizing: border-box;
+        
+        .glass-nav {
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
+        /* Gestione Pagine Separate (SPA) rigorosa - Comando Forzato! */
         .page-section {
-            display: none; 
-            padding: 6rem 1.5rem 5rem 1.5rem; /* Spazio per l'header e per il footer fisso */
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-        .page-section.active {
-            display: block;
+            display: none !important; /* Nessuno potrà scorrere dove non deve */
             animation: fadeIn 0.4s ease-in-out;
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* FOOTER FISSO COME RICHIESTO */
-        #fixed-footer {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: var(--light);
-            border-top: 1px solid #eaeaea;
-            padding: 1rem 1.5rem;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
-            box-sizing: border-box;
+        .page-section.active {
+            display: block !important; 
         }
-        .footer-socials a { color: var(--darkText); font-size: 1.2rem; margin-left: 1rem; transition: color 0.3s; }
-        .footer-socials a:hover { color: var(--sage); }
 
-        #menu-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(250, 250, 250, 0.98);
-            z-index: 2000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden; transition: 0.3s ease;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        #menu-overlay.open { opacity: 1; visibility: visible; }
-        .menu-item { font-size: 1.8rem; margin: 1rem 0; font-family: 'Playfair Display', serif; cursor: pointer; color: var(--darkText); transition: 0.3s; }
-        .menu-item:hover { color: var(--sage); }
-        #close-menu { position: absolute; top: 1.5rem; left: 1.5rem; font-size: 2rem; cursor: pointer; }
 
-        .lang-dropdown { position: absolute; top: 3.5rem; right: 1.5rem; background: #222; color: #fff; border-radius: 8px; padding: 0.5rem; display: none; flex-direction: column; z-index: 1500; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .lang-dropdown.open { display: flex; }
-        .lang-option { padding: 0.5rem 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
-        .lang-option:hover { background: #333; border-radius: 4px; }
-
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1rem 0; }
-        .portfolio-item { position: relative; overflow: hidden; border-radius: 8px; height: 350px; cursor: pointer; }
-        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .portfolio-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 1.5rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white; transform: translateY(20px); opacity: 0; transition: all 0.4s ease;
+        .service-card {
+            transition: all 0.4s ease;
         }
-        .portfolio-item:hover img { transform: scale(1.05); }
-        .portfolio-item:hover .portfolio-overlay { transform: translateY(0); opacity: 1; }
-        .portfolio-line { width: 40px; height: 2px; background: var(--sage); margin-top: 0.5rem; transition: width 0.4s ease; }
-        .portfolio-item:hover .portfolio-line { width: 100px; }
 
-        #offer-popup {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 3000;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden; transition: 0.3s ease;
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 160, 148, 0.15);
         }
-        #offer-popup.open { opacity: 1; visibility: visible; }
-        .popup-content { background: white; padding: 2.5rem; border-radius: 12px; text-align: center; max-width: 90%; width: 400px; position: relative; }
-        .close-popup { position: absolute; top: 1rem; right: 1rem; cursor: pointer; font-size: 1.5rem; }
 
-        .btn { display: inline-block; background: var(--sage); color: white; padding: 1rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 500; transition: 0.3s; margin-top: 1rem; cursor: pointer; border: none; }
-        .btn:hover { background: #6b7d73; }
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(250,250,250,0.95) 0%, rgba(250,250,250,0.3) 100%);
+        }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased selection:bg-sage selection:text-white">
 
-    <header>
-        <div id="hamburger" onclick="toggleMenu()" style="cursor: pointer; font-size: 1.5rem;">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-        <div class="serif" style="font-size: 1.2rem; font-weight: 600; text-align: center; letter-spacing: 2px;">
-            C. E. NANNI
-        </div>
-        <div style="position: relative; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;" onclick="toggleLang()">
-            <i class="fa-solid fa-globe"></i>
-            <span id="current-lang" style="font-size: 0.8rem; font-weight: 600;">IT</span>
-            <div id="lang-dropdown" class="lang-dropdown">
-                <div class="lang-option" onclick="setLang('it', event)">🇮🇹 IT</div>
-                <div class="lang-option" onclick="setLang('en', event)">🇬🇧 EN</div>
-            </div>
-        </div>
-    </header>
-
-    <div id="menu-overlay">
-        <i class="fa-solid fa-xmark" id="close-menu" onclick="toggleMenu()"></i>
-        <div class="menu-item" onclick="navTo('home')" data-tr="menu_home">Home</div>
-        <div class="menu-item" onclick="navTo('about')" data-tr="menu_about">Chi Siamo</div>
-        <div class="menu-item" onclick="navTo('treatments')" data-tr="menu_treatments">Trattamenti</div>
-        <div class="menu-item" onclick="navTo('portfolio')" data-tr="menu_portfolio">I Nostri Lavori</div>
-        <div class="menu-item" onclick="navTo('booking')" data-tr="menu_booking">Prenota</div>
-        <div class="menu-item" onclick="navTo('location')" data-tr="menu_location">Dove Siamo</div>
-        <div class="menu-item" onclick="openPopup()" data-tr="menu_offer" style="color: var(--sage);">Locandina Offerta</div>
-    </div>
-
-    <!-- SEZIONE 1: HOME -->
-    <div id="home" class="page-section active" style="text-align: center;">
-        <h1 class="serif" style="font-size: 2.5rem; color: var(--sage); margin-top: 2rem;" data-tr="home_title">La tua Oasi di Benessere</h1>
-        <p style="margin-top: 1rem; color: #666; font-size: 1.1rem;" data-tr="home_sub">Ritrova il tuo equilibrio naturale.</p>
-        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Spa" style="width: 100%; border-radius: 12px; margin-top: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-        <br>
-        <a href="https://wa.me/393756330365" class="btn" data-tr="book_now">Prenota via WhatsApp</a>
-    </div>
-
-    <!-- SEZIONE 2: CHI SIAMO -->
-    <div id="about" class="page-section">
-        <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center;" data-tr="about_title">Chi Siamo</h1>
-        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cabina Trattamenti" style="width: 100%; border-radius: 12px; margin: 1.5rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-        
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-            <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem;">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Annamaria Vitaliti" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <h3 class="serif" style="font-size: 1.3rem; margin-bottom: 0.5rem;">Annamaria Vitaliti</h3>
-            <p style="font-size: 0.9rem; font-style: italic; color: #555;" data-tr="about_quote">"Accolgo i clienti con gentilezza e professionalità per offrire un servizio di prima qualità. La vostra bellezza è la mia passione."</p>
-        </div>
-    </div>
-
-    <!-- SEZIONE 3: TRATTAMENTI -->
-    <div id="treatments" class="page-section">
-        <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center; margin-bottom: 1.5rem;" data-tr="treatments_title">I Nostri Trattamenti</h1>
-        <p style="text-align: center; margin-bottom: 2rem; color: #666;" data-tr="treatments_sub">Utilizziamo solo prodotti di altissima qualità come Selenia e Masterbeauty.</p>
-        
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-            <h3 class="serif" data-tr="treat_1">Cura del Viso</h3>
-            <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_1_desc">Trattamenti anti-age e purificanti avanzati.</p>
-        </div>
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-            <h3 class="serif" data-tr="treat_2">Benessere Corpo</h3>
-            <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_2_desc">Massaggi rilassanti e modellanti.</p>
-        </div>
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-            <h3 class="serif" data-tr="treat_3">Estetica di Base</h3>
-            <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;" data-tr="treat_3_desc">Epilazione, manicure e pedicure curativo.</p>
-        </div>
-        
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="https://wa.me/393756330365" class="btn" data-tr="book_now">Prenota via WhatsApp</a>
-        </div>
-    </div>
-
-    <!-- SEZIONE 4: PORTFOLIO -->
-    <div id="portfolio" class="page-section">
-        <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center; margin-bottom: 0.5rem;" data-tr="portfolio_title">I Nostri Lavori</h1>
-        <p style="text-align: center; font-size: 0.75rem; color: #999; font-style: italic; margin-bottom: 2rem;" data-tr="portfolio_disclaimer">Le foto presenti sono attualmente a scopo formativo/illustrativo e verranno presto sostituite con i nostri lavori reali.</p>
-        
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nail Art">
-                <div class="portfolio-overlay">
-                    <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_1">Nail Art & Manicure</h3>
-                    <div class="portfolio-line"></div>
+    <nav class="glass-nav fixed w-full z-50 top-0 shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-serif text-3xl font-semibold text-sage tracking-wider">NANNI</span>
                 </div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Trattamenti Viso">
-                <div class="portfolio-overlay">
-                    <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_2">Skincare Avanzata</h3>
-                    <div class="portfolio-line"></div>
-                </div>
-            </div>
-            <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Massaggi">
-                <div class="portfolio-overlay">
-                    <h3 class="serif" style="font-size: 1.2rem;" data-tr="port_3">Massaggi Rilassanti</h3>
-                    <div class="portfolio-line"></div>
+
+                <!-- Azioni Destra -->
+                <div class="flex items-center space-x-6">
+                    
+                    <!-- Traduttore Magico -->
+                    <div class="relative group cursor-pointer" id="lang-container">
+                        <div class="flex items-center text-darkText hover:text-sage transition p-2">
+                            <i class="fa-solid fa-globe mr-2 text-lg"></i>
+                            <span id="current-lang" class="font-medium text-sm">IT</span>
+                        </div>
+                        
+                        <div class="absolute right-0 top-full mt-0 w-36 bg-white rounded-md shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 z-50">
+                            <button onclick="changeLang('IT')" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-stone hover:text-sage flex items-center">
+                                <span class="mr-3 text-lg">🇮🇹</span> Italiano
+                            </button>
+                            <button onclick="changeLang('EN')" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-stone hover:text-sage flex items-center border-t border-gray-50">
+                                <span class="mr-3 text-lg">🇬🇧</span> English
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hamburger Menu Universale -->
+                    <button id="mobile-menu-btn" class="text-darkText hover:text-sage focus:outline-none p-2 transition-transform duration-200">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- SEZIONE 5: CALENDARIO / PRENOTA -->
-    <div id="booking" class="page-section">
-        <h1 class="serif" style="font-size: 2rem; color: var(--sage); text-align: center;" data-tr="booking_title">Prenota Appuntamento</h1>
-        
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 1.5rem;">
-            <!-- Finto Calendario visivo per il sito dimostrativo -->
-            <div style="height: 300px; border: 1px dashed var(--beige); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--sage); font-family: 'Montserrat', sans-serif;">
-                <p data-tr="calendar_module">[ Modulo Calendario ]</p>
-            </div>
-            
-            <button class="btn" style="width: 100%; margin-top: 1.5rem; font-family: 'Montserrat', sans-serif;" data-tr="confirm_appt">Conferma Appuntamento</button>
-            
-            <div style="display: flex; align-items: center; margin: 1.5rem 0;">
-                <hr style="flex: 1; border: none; border-top: 1px solid #eee;">
-                <span style="padding: 0 1rem; color: #999; font-size: 0.9rem;" data-tr="or">Oppure</span>
-                <hr style="flex: 1; border: none; border-top: 1px solid #eee;">
-            </div>
-            
-            <a href="https://wa.me/393756330365" class="btn" style="background: #25D366; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" data-tr="book_wa">
-                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Prenota via WhatsApp
-            </a>
-        </div>
-    </div>
+        <div id="mobile-menu" class="hidden bg-white border-t border-gray-100 absolute w-full shadow-2xl origin-top transition-all duration-300 z-40">
+            <div class="px-6 py-8 space-y-2 text-center max-w-lg mx-auto">
+                <a href="#home" data-i18n="menu_home" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Home</a>
+                <a href="#about" data-i18n="menu_about" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Chi Siamo</a>
+                <a href="#services" data-i18n="menu_services" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Trattamenti</a>
+                <a href="#portfolio" data-i18n="menu_portfolio" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">I Nostri Lavori</a>
+                <a href="#contact" data-i18n="menu_contact" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Dove Siamo</a>
+                
+                <button onclick="openOfferPopup()" data-i18n="menu_offer" class="w-full block px-3 py-4 text-sm font-medium text-sage hover:bg-stone uppercase tracking-widest rounded transition mt-2">
+                    <i class="fa-solid fa-gift mr-2"></i> Locandina Offerta
+                </button>
 
-    <!-- SEZIONE 6: DOVE SIAMO -->
-    <div id="location" class="page-section" style="text-align: center;">
-        <h1 class="serif" style="font-size: 2rem; color: var(--sage); margin-bottom: 1.5rem;" data-tr="location_title">Vienici a Trovare</h1>
-        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-            <i class="fa-solid fa-location-dot" style="font-size: 2rem; color: var(--sage); margin-bottom: 1rem;"></i>
-            <h3 class="serif" style="font-size: 1.2rem;">Centro Estetico Nanni</h3>
-            <p style="color: #666; margin: 0.5rem 0;">Via dei Pradacci 3, Tradate (VA)</p>
-            <a href="https://maps.google.com/?q=Via+dei+Pradacci+3,+Tradate" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--sage); text-decoration: none; font-weight: 500; margin-top: 0.5rem;" data-tr="open_map">
-                <i class="fa-solid fa-map"></i> Apri Mappa
-            </a>
-            
-            <div style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
-                <h4 class="serif" data-tr="hours">Orari</h4>
-                <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;">Lun - Sab: 09:00 - 19:00<br>Domenica: Chiuso</p>
+                <a href="#booking" data-i18n="menu_book" class="block px-3 py-4 text-sm font-medium text-white bg-sage hover:bg-sageDark uppercase tracking-widest rounded transition shadow-md mt-4">Prenota Ora</a>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- FOOTER SEMPRE VISIBILE -->
-    <footer id="fixed-footer">
-        <div style="font-size: 0.8rem; font-weight: 600; color: var(--sage);">
-            @ Centro Estetico Nanni
-        </div>
-        <div class="footer-socials">
-            <a href="https://www.instagram.com/centroestetico.nanni" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.facebook.com/search/top?q=CENTRO%20ESTETICO%20NANNI" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-        </div>
-    </footer>
+    <main class="pt-20">
 
-    <!-- POPUP -->
-    <div id="offer-popup">
-        <div class="popup-content">
-            <i class="fa-solid fa-xmark close-popup" onclick="closePopup()"></i>
-            <h2 class="serif" style="color: var(--sage); font-size: 1.8rem;" data-tr="popup_title">Offerta Speciale</h2>
-            <p style="margin: 1rem 0; color: #555;" data-tr="popup_desc">Pacchetto Detox Viso & Corpo a un prezzo speciale. Approfittane ora!</p>
-            <a href="https://wa.me/393756330365" class="btn" data-tr="book_now">Prenota via WhatsApp</a>
+        <section id="home" class="page-section active h-[calc(100vh-5rem)]">
+            <div class="relative w-full h-full flex items-center">
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=2000&q=80" alt="Spa Background" class="w-full h-full object-cover" />
+                    <div class="absolute inset-0 hero-overlay"></div>
+                </div>
+                
+                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    <div class="max-w-2xl">
+                        <span data-i18n="hero_city" class="text-sage uppercase tracking-widest text-sm font-semibold mb-4 block">Tradate, Varese</span>
+                        <h1 data-i18n="hero_title" class="text-5xl md:text-7xl font-serif text-darkText leading-tight mb-6">
+                            La tua oasi di <br><span class="text-sage italic">benessere.</span>
+                        </h1>
+                        <p data-i18n="hero_p" class="text-lg text-gray-600 mb-10 font-light leading-relaxed max-w-lg">
+                            Riscopri l'equilibrio tra mente e corpo. Trattamenti viso e corpo personalizzati per una bellezza autentica e duratura.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#booking" data-i18n="btn_book" class="bg-sage text-white px-8 py-4 rounded text-sm uppercase tracking-widest hover:bg-sageDark transition text-center font-medium shadow-lg shadow-sage/30">
+                                Prenota Appuntamento
+                            </a>
+                            <a href="#services" data-i18n="btn_services" class="bg-transparent border border-darkText text-darkText px-8 py-4 rounded text-sm uppercase tracking-widest hover:bg-darkText hover:text-white transition text-center font-medium">
+                                Scopri i Servizi
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="page-section py-20 bg-white min-h-[calc(100vh-5rem)]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span data-i18n="about_tag" class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">La Nostra Filosofia</span>
+                    <h2 data-i18n="about_title" class="text-4xl font-serif text-darkText mb-6">Eccellenza e cura del <span class="text-sage italic">dettaglio.</span></h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=1000&q=80" alt="Cabina Trattamenti Estetici" class="rounded-lg shadow-xl w-full h-[500px] object-cover" />
+                        <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-stone rounded-full -z-10 hidden md:block"></div>
+                    </div>
+                    
+                    <div>
+                        <p data-i18n="about_p1" class="text-gray-600 mb-6 font-light leading-relaxed text-lg">
+                            Al Centro Estetico Nanni, crediamo che la bellezza nasca dall'armonia. Utilizziamo prodotti di altissima qualità come <strong class="font-medium text-darkText">Selenia</strong> e <strong class="font-medium text-darkText">Masterbeauty</strong> per garantirti risultati visibili e duraturi.
+                        </p>
+                        <p data-i18n="about_p2" class="text-gray-600 mb-10 font-light leading-relaxed">
+                            Ogni trattamento è un'esperienza su misura, studiata sulle esigenze specifiche della tua pelle in un ambiente rilassante e igienizzato con i massimi standard.
+                        </p>
+                        
+                        <div class="flex items-center p-6 bg-stone rounded-xl border-l-4 border-sage shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Annamaria Vitaliti" class="w-20 h-20 rounded-full object-cover mr-5 shadow-md border-2 border-white" />
+                            <div>
+                                <h4 class="font-serif text-xl text-darkText font-medium">Annamaria Vitaliti</h4>
+                                <p data-i18n="about_role" class="text-xs text-sage uppercase tracking-wider mb-2 font-semibold">Fondatrice</p>
+                                <p data-i18n="about_quote" class="text-sm text-gray-500 italic">"Accoglienza, professionalità e un sorriso per farvi sentire sempre al centro della nostra attenzione."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="page-section py-20 bg-stone min-h-[calc(100vh-5rem)]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span data-i18n="serv_tag" class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">I Nostri Servizi</span>
+                <h2 data-i18n="serv_title" class="text-4xl font-serif text-darkText mb-16">Percorsi di <span class="text-sage italic">Bellezza</span></h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Viso -->
+                    <div class="service-card bg-white p-10 rounded-xl text-left shadow-md border border-gray-100 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-sage/5 rounded-bl-full z-0"></div>
+                        <i class="fa-solid fa-spa text-4xl text-beige mb-6 relative z-10"></i>
+                        <h3 data-i18n="serv_face" class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Viso</h3>
+                        <ul class="text-gray-500 font-light space-y-4 mb-6 relative z-10">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_face1">Pulizia Viso Profonda</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_face2">Trattamenti Anti-Age Selenia</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_face3">Acidi e Peeling</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_face4">Laminazione Ciglia</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Corpo -->
+                    <div class="service-card bg-white p-10 rounded-xl text-left shadow-md border border-gray-100 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-sage/5 rounded-bl-full z-0"></div>
+                        <i class="fa-solid fa-leaf text-4xl text-beige mb-6 relative z-10"></i>
+                        <h3 data-i18n="serv_body" class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Corpo</h3>
+                        <ul class="text-gray-500 font-light space-y-4 mb-6 relative z-10">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_body1">Massaggi Relax & Decontratturanti</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_body2">Linfodrenaggio</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_body3">Trattamenti Anticellulite</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_body4">Pressoterapia</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Base -->
+                    <div class="service-card bg-white p-10 rounded-xl text-left shadow-md border border-gray-100 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-sage/5 rounded-bl-full z-0"></div>
+                        <i class="fa-solid fa-hand-sparkles text-4xl text-beige mb-6 relative z-10"></i>
+                        <h3 data-i18n="serv_base" class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Base</h3>
+                        <ul class="text-gray-500 font-light space-y-4 mb-6 relative z-10">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_base1">Manicure & Pedicure Curativo</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_base2">Smalto Semipermanente</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_base3">Epilazione Classica</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_base4">Epilazione Pasta di Zucchero</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="page-section py-20 bg-white min-h-[calc(100vh-5rem)]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span data-i18n="port_tag" class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">Portfolio</span>
+                <h2 data-i18n="port_title" class="text-4xl font-serif text-darkText mb-2">I Nostri <span class="text-sage italic">Lavori</span></h2>
+                
+                <!-- Disclaimer richiesto -->
+                <p data-i18n="port_disclaimer" class="text-xs text-gray-400 italic max-w-lg mx-auto mb-16 px-4">
+                    * Le foto presenti in questa galleria sono a scopo illustrativo e formativo. Verranno presto sostituite con i lavori reali del centro estetico.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Card Portfolio 1 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&w=800&q=80" alt="Nails Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img1" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nail Art & Cura</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card Portfolio 2 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80" alt="Skincare Facial" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img2" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Trattamenti Viso</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card Portfolio 3 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Body Massage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img3" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Massaggi Relax</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card Portfolio 4 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?auto=format&fit=crop&w=800&q=80" alt="Lashes and Brows" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img4" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Laminazione Ciglia</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card Portfolio 5 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=800&q=80" alt="Beauty Tools" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img5" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Estetica Avanzata</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card Portfolio 6 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Spa Relax" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img6" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Ambiente Spa</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="page-section py-20 bg-stone min-h-[calc(100vh-5rem)]">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100">
+                    <div class="text-center mb-10">
+                        <h2 data-i18n="book_title" class="text-3xl font-serif text-darkText mb-4">Prenota il tuo Momento</h2>
+                        <p data-i18n="book_p" class="text-gray-500 font-light">Seleziona data e ora preferita sul nostro calendario intelligente.</p>
+                    </div>
+
+                    <div class="bg-stone rounded-xl p-6 shadow-inner border border-gray-200 mb-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <button class="text-gray-400 hover:text-sage transition"><i class="fa-solid fa-chevron-left"></i></button>
+                            <span class="font-medium text-darkText uppercase tracking-widest text-sm">Novembre 2026</span>
+                            <button class="text-gray-400 hover:text-sage transition"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                        
+                        <div class="grid grid-cols-7 gap-2 text-center mb-6">
+                            <div data-i18n="day_1" class="text-xs text-gray-400 font-semibold">LUN</div>
+                            <div data-i18n="day_2" class="text-xs text-gray-400 font-semibold">MAR</div>
+                            <div data-i18n="day_3" class="text-xs text-gray-400 font-semibold">MER</div>
+                            <div data-i18n="day_4" class="text-xs text-gray-400 font-semibold">GIO</div>
+                            <div data-i18n="day_5" class="text-xs text-gray-400 font-semibold">VEN</div>
+                            <div data-i18n="day_6" class="text-xs text-gray-400 font-semibold">SAB</div>
+                            <div data-i18n="day_7" class="text-xs text-gray-400 font-semibold">DOM</div>
+                            
+                            <div class="py-2 text-gray-300 text-sm">26</div>
+                            <div class="py-2 text-gray-300 text-sm">27</div>
+                            <div class="py-2 text-gray-300 text-sm">28</div>
+                            <div class="py-2 text-gray-300 text-sm">29</div>
+                            <div class="py-2 text-gray-300 text-sm">30</div>
+                            <div class="py-2 text-gray-300 text-sm">31</div>
+                            <div class="py-2 text-darkText hover:bg-sage hover:text-white rounded cursor-pointer transition text-sm">1</div>
+                            <div class="py-2 bg-sage text-white rounded cursor-pointer shadow-md text-sm font-medium transform scale-110">2</div>
+                            <div class="py-2 text-darkText hover:bg-sage hover:text-white rounded cursor-pointer transition text-sm">3</div>
+                            <div class="py-2 text-darkText hover:bg-sage hover:text-white rounded cursor-pointer transition text-sm">4</div>
+                            <div class="py-2 text-darkText hover:bg-sage hover:text-white rounded cursor-pointer transition text-sm">5</div>
+                            <div class="py-2 text-darkText hover:bg-sage hover:text-white rounded cursor-pointer transition text-sm">6</div>
+                            <div class="py-2 text-gray-300 text-sm">7</div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-6">
+                            <span data-i18n="book_avail" class="block text-xs text-gray-400 mb-3 uppercase tracking-wider font-semibold">Orari Disponibili</span>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="px-4 py-2 border border-gray-300 text-sm text-gray-600 rounded hover:border-sage hover:text-sage bg-white transition">09:30</button>
+                                <button class="px-4 py-2 border border-sage bg-sage/10 text-sm text-sage rounded font-medium shadow-sm">11:00</button>
+                                <button class="px-4 py-2 border border-gray-300 text-sm text-gray-600 rounded hover:border-sage hover:text-sage bg-white transition">15:00</button>
+                                <button class="px-4 py-2 border border-gray-300 text-sm text-gray-600 rounded hover:border-sage hover:text-sage bg-white transition">17:30</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center flex flex-col items-center">
+                        <button data-i18n="btn_confirm" class="w-full bg-sage text-white py-4 rounded text-sm uppercase tracking-widest hover:bg-sageDark transition font-medium shadow-lg mb-6">
+                            Conferma Appuntamento
+                        </button>
+
+                        <div class="w-full flex items-center justify-center mb-6 max-w-sm">
+                            <div class="h-px bg-gray-200 flex-1"></div>
+                            <span data-i18n="book_or" class="px-4 text-xs text-gray-400 uppercase tracking-widest font-medium">Oppure prenota alla vecchia maniera</span>
+                            <div class="h-px bg-gray-200 flex-1"></div>
+                        </div>
+                        
+                        <a href="https://wa.me/393756330365" target="_blank" class="w-full md:w-auto bg-[#25D366] text-white px-10 py-4 rounded-full text-sm font-bold tracking-wide hover:bg-[#20b858] transition flex items-center justify-center shadow-md transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp text-2xl mr-3"></i> <span data-i18n="btn_wa">Scrivici su WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section bg-darkText text-white min-h-[calc(100vh-5rem)] flex flex-col justify-between">
+            <div class="py-20 flex-grow flex items-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    
+                    <div class="text-center mb-16">
+                        <h2 data-i18n="contact_title" class="text-5xl font-serif text-sage mb-4">Vieni a trovarci</h2>
+                        <p data-i18n="contact_p" class="text-gray-400 font-light text-lg">Il tuo spazio di relax nel cuore di Tradate.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 text-center md:text-left max-w-4xl mx-auto">
+                        <div class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
+                            <i class="fa-solid fa-location-dot text-3xl text-beige mb-6"></i>
+                            <h4 data-i18n="cont_addr" class="font-medium text-xl mb-4 tracking-wider text-white">INDIRIZZO</h4>
+                            <p class="text-gray-400 font-light leading-relaxed mb-4">
+                                Via dei Pradacci 3<br>
+                                21049 Tradate (VA)
+                            </p>
+                            <!-- Bottone per aprire Google Maps -->
+                            <a href="https://www.google.com/maps/search/?api=1&query=Via+dei+Pradacci+3,+Tradate" target="_blank" class="inline-flex items-center text-sage hover:text-white transition text-sm font-medium uppercase tracking-widest mb-6">
+                                <i class="fa-solid fa-map text-lg mr-2"></i> <span data-i18n="cont_map">Apri Mappa</span>
+                            </a>
+                            <br>
+                            <a href="https://wa.me/393756330365" target="_blank" class="text-white hover:text-sage transition flex items-center justify-center md:justify-start font-medium text-lg mt-4 border-t border-gray-700 pt-6">
+                                <i class="fa-brands fa-whatsapp mr-3 text-2xl text-[#25D366]"></i> +39 375 633 0365
+                            </a>
+                        </div>
+                        
+                        <div class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
+                            <i class="fa-solid fa-clock text-3xl text-beige mb-6"></i>
+                            <h4 data-i18n="cont_hours" class="font-medium text-xl mb-4 tracking-wider text-white">ORARI</h4>
+                            <ul class="text-gray-400 font-light space-y-4">
+                                <li class="flex justify-between border-b border-gray-700 pb-2"><span data-i18n="day_2_5">Mar - Ven</span> <span>09:30 - 19:30</span></li>
+                                <li class="flex justify-between border-b border-gray-700 pb-2"><span data-i18n="day_6">SAB</span> <span>09:00 - 18:00</span></li>
+                                <li class="flex justify-between text-sage pt-2"><span data-i18n="day_7_1">Dom - Lun</span> <span data-i18n="closed">Chiuso</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer minimalista posizionato SOLO dentro la pagina contatti -->
+            <div class="w-full bg-gray-900 py-6 border-t border-gray-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 font-light">
+                    <span class="mb-4 md:mb-0">&copy; 2026 @ Centro Estetico Nanni</span>
+                    <div class="flex space-x-5">
+                        <a href="https://www.instagram.com/" target="_blank" class="hover:text-sage transition flex items-center">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </a>
+                        <a href="https://www.facebook.com/" target="_blank" class="hover:text-sage transition flex items-center">
+                            <i class="fa-brands fa-facebook-f text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="offer-popup" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[70] flex items-center justify-center opacity-0 invisible transition-all duration-500">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden transform scale-95 transition-transform duration-500 relative" id="popup-content">
+            
+            <button id="close-popup" class="absolute top-4 right-4 text-gray-500 hover:text-darkText focus:outline-none z-10 bg-white/90 rounded-full w-10 h-10 flex items-center justify-center shadow-sm transition">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="h-56 w-full bg-stone relative">
+                <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&q=80" alt="Detox Spa" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+            </div>
+            
+            <div class="p-8 text-center -mt-8 relative z-10">
+                <span data-i18n="pop_tag" class="bg-sage text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 inline-block shadow-md">Offerta Benvenuto</span>
+                <h4 data-i18n="pop_title" class="text-3xl font-serif text-darkText mb-3">Pacchetto Detox</h4>
+                <p data-i18n="pop_p" class="text-gray-500 text-base mb-6 font-light leading-relaxed">Trattamento purificante viso e corpo completo per rigenerare la pelle. Un'ora e mezza di puro relax.</p>
+                <div class="text-4xl font-serif text-sage mb-8">€ 75 <span data-i18n="pop_old" class="text-sm text-gray-400 line-through font-sans block md:inline md:ml-2">Invece di € 110</span></div>
+                
+                <a href="https://wa.me/393756330365?text=Salve,%20vorrei%20prenotare%20il%20Pacchetto%20Detox%20da%2075%E2%82%AC%20visto%20sul%20sito!" target="_blank" class="block w-full bg-[#25D366] text-white py-4 rounded-xl text-sm font-bold tracking-wide hover:bg-[#20b858] transition shadow-lg flex items-center justify-center">
+                    <i class="fa-brands fa-whatsapp text-xl mr-2"></i> <span data-i18n="pop_btn">Prenota Subito</span>
+                </a>
+                <p data-i18n="pop_disc" class="text-xs text-gray-400 mt-5 font-light">*Valido solo per le nuove clienti</p>
+            </div>
         </div>
     </div>
 
     <script>
-        function navTo(sectionId) {
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            toggleMenu(); 
-            window.scrollTo(0, 0);
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('menu-overlay');
-            menu.classList.toggle('open');
-        }
-
-        function openPopup() {
-            document.getElementById('offer-popup').classList.add('open');
-        }
-        function closePopup() {
-            document.getElementById('offer-popup').classList.remove('open');
-        }
-
-        const dict = {
-            'it': {
-                'menu_home': 'Home', 'menu_about': 'Chi Siamo', 'menu_treatments': 'Trattamenti', 'menu_portfolio': 'I Nostri Lavori', 'menu_booking': 'Prenota', 'menu_location': 'Dove Siamo', 'menu_offer': 'Locandina Offerta',
-                'home_title': 'La tua Oasi di Benessere', 'home_sub': 'Ritrova il tuo equilibrio naturale.', 'book_now': 'Prenota via WhatsApp',
-                'about_title': 'Chi Siamo', 'about_quote': '"Accolgo i clienti con gentilezza e professionalità per offrire un servizio di prima qualità. La vostra bellezza è la mia passione."',
-                'treatments_title': 'I Nostri Trattamenti', 'treatments_sub': 'Utilizziamo solo prodotti di altissima qualità come Selenia e Masterbeauty.',
-                'treat_1': 'Cura del Viso', 'treat_1_desc': 'Trattamenti anti-age e purificanti avanzati.',
-                'treat_2': 'Benessere Corpo', 'treat_2_desc': 'Massaggi rilassanti e modellanti.',
-                'treat_3': 'Estetica di Base', 'treat_3_desc': 'Epilazione, manicure e pedicure curativo.',
-                'portfolio_title': 'I Nostri Lavori', 'portfolio_disclaimer': 'Le foto presenti sono attualmente a scopo formativo/illustrativo e verranno presto sostituite con i nostri lavori reali.',
-                'port_1': 'Nail Art & Manicure', 'port_2': 'Skincare Avanzata', 'port_3': 'Massaggi Rilassanti',
-                'booking_title': 'Prenota Appuntamento', 'calendar_module': '[ Modulo Calendario ]', 'confirm_appt': 'Conferma Appuntamento', 'or': 'Oppure', 'book_wa': 'Prenota via WhatsApp',
-                'location_title': 'Vienici a Trovare', 'open_map': 'Apri Mappa', 'hours': 'Orari',
-                'popup_title': 'Offerta Speciale', 'popup_desc': 'Pacchetto Detox Viso & Corpo a un prezzo speciale. Approfittane ora!'
+        // DIZIONARIO TRADUZIONI 
+        const i18n = {
+            'IT': {
+                'menu_home': 'Home', 'menu_about': 'Chi Siamo', 'menu_services': 'Trattamenti', 'menu_portfolio': 'I Nostri Lavori', 'menu_contact': 'Dove Siamo', 'menu_offer': 'Locandina Offerta', 'menu_book': 'Prenota Ora',
+                'hero_city': 'Tradate, Varese', 'hero_title': 'La tua oasi di <br><span class="text-sage italic">benessere.</span>', 'hero_p': 'Riscopri l\'equilibrio tra mente e corpo. Trattamenti viso e corpo personalizzati per una bellezza autentica e duratura.', 'btn_book': 'Prenota Appuntamento', 'btn_services': 'Scopri i Servizi',
+                'about_tag': 'La Nostra Filosofia', 'about_title': 'Eccellenza e cura del <span class="text-sage italic">dettaglio.</span>', 'about_p1': 'Al Centro Estetico Nanni, crediamo che la bellezza nasca dall\'armonia. Utilizziamo prodotti di altissima qualità come <strong class="font-medium text-darkText">Selenia</strong> e <strong class="font-medium text-darkText">Masterbeauty</strong> per garantirti risultati visibili e duraturi.', 'about_p2': 'Ogni trattamento è un\'esperienza su misura, studiata sulle esigenze specifiche della tua pelle in un ambiente rilassante e igienizzato con i massimi standard.', 'about_role': 'Fondatrice', 'about_quote': '"Accoglienza, professionalità e un sorriso per farvi sentire sempre al centro della nostra attenzione."',
+                'serv_tag': 'I Nostri Servizi', 'serv_title': 'Percorsi di <span class="text-sage italic">Bellezza</span>', 'serv_face': 'Estetica Viso', 'serv_body': 'Estetica Corpo', 'serv_base': 'Estetica Base',
+                'li_face1': 'Pulizia Viso Profonda', 'li_face2': 'Trattamenti Anti-Age Selenia', 'li_face3': 'Acidi e Peeling', 'li_face4': 'Laminazione Ciglia',
+                'li_body1': 'Massaggi Relax & Decontratturanti', 'li_body2': 'Linfodrenaggio', 'li_body3': 'Trattamenti Anticellulite', 'li_body4': 'Pressoterapia',
+                'li_base1': 'Manicure & Pedicure Curativo', 'li_base2': 'Smalto Semipermanente', 'li_base3': 'Epilazione Classica', 'li_base4': 'Epilazione Pasta di Zucchero',
+                'port_tag': 'Portfolio', 'port_title': 'I Nostri <span class="text-sage italic">Lavori</span>',
+                'port_disclaimer': '* Le foto presenti in questa galleria sono a scopo illustrativo e formativo. Verranno presto sostituite con i lavori reali del centro estetico.',
+                'port_img1': 'Nail Art & Cura', 'port_img2': 'Trattamenti Viso', 'port_img3': 'Massaggi Relax', 'port_img4': 'Laminazione Ciglia', 'port_img5': 'Estetica Avanzata', 'port_img6': 'Ambiente Spa',
+                'book_title': 'Prenota il tuo Momento', 'book_p': 'Seleziona data e ora preferita sul nostro calendario intelligente.', 'book_avail': 'Orari Disponibili', 'btn_confirm': 'Conferma Appuntamento', 'book_or': 'Oppure prenota alla vecchia maniera', 'btn_wa': 'Scrivici su WhatsApp',
+                'day_1': 'LUN', 'day_2': 'MAR', 'day_3': 'MER', 'day_4': 'GIO', 'day_5': 'VEN', 'day_6': 'SAB', 'day_7': 'DOM', 'day_2_5': 'Mar - Ven', 'day_7_1': 'Dom - Lun', 'closed': 'Chiuso',
+                'contact_title': 'Vieni a trovarci', 'contact_p': 'Il tuo spazio di relax nel cuore di Tradate.', 'cont_addr': 'INDIRIZZO', 'cont_map': 'Apri Mappa', 'cont_hours': 'ORARI',
+                'pop_tag': 'Offerta Benvenuto', 'pop_title': 'Pacchetto Detox', 'pop_p': 'Trattamento purificante viso e corpo completo per rigenerare la pelle. Un\'ora e mezza di puro relax.', 'pop_old': 'Invece di € 110', 'pop_btn': 'Prenota Subito', 'pop_disc': '*Valido solo per le nuove clienti'
             },
-            'en': {
-                'menu_home': 'Home', 'menu_about': 'About Us', 'menu_treatments': 'Treatments', 'menu_portfolio': 'Our Works', 'menu_booking': 'Book Now', 'menu_location': 'Location', 'menu_offer': 'Special Offer',
-                'home_title': 'Your Wellness Oasis', 'home_sub': 'Find your natural balance.', 'book_now': 'Book via WhatsApp',
-                'about_title': 'About Us', 'about_quote': '"I welcome clients with kindness and professionalism to offer top quality service. Your beauty is my passion."',
-                'treatments_title': 'Our Treatments', 'treatments_sub': 'We use only top quality products like Selenia and Masterbeauty.',
-                'treat_1': 'Facial Care', 'treat_1_desc': 'Advanced anti-aging and purifying treatments.',
-                'treat_2': 'Body Wellness', 'treat_2_desc': 'Relaxing and shaping massages.',
-                'treat_3': 'Basic Esthetics', 'treat_3_desc': 'Hair removal, healing manicure and pedicure.',
-                'portfolio_title': 'Our Works', 'portfolio_disclaimer': 'The photos shown are currently for illustrative/training purposes and will soon be replaced with our real work.',
-                'port_1': 'Nail Art & Manicure', 'port_2': 'Advanced Skincare', 'port_3': 'Relaxing Massages',
-                'booking_title': 'Book Appointment', 'calendar_module': '[ Calendar Module ]', 'confirm_appt': 'Confirm Appointment', 'or': 'Or', 'book_wa': 'Book via WhatsApp',
-                'location_title': 'Come Visit Us', 'open_map': 'Open Map', 'hours': 'Opening Hours',
-                'popup_title': 'Special Offer', 'popup_desc': 'Detox Face & Body package at a special price. Book now!'
+            'EN': {
+                'menu_home': 'Home', 'menu_about': 'About Us', 'menu_services': 'Treatments', 'menu_portfolio': 'Our Work', 'menu_contact': 'Location', 'menu_offer': 'Special Offer', 'menu_book': 'Book Now',
+                'hero_city': 'Tradate, Italy', 'hero_title': 'Your oasis of <br><span class="text-sage italic">wellbeing.</span>', 'hero_p': 'Rediscover the balance between mind and body. Personalized face and body treatments for authentic and lasting beauty.', 'btn_book': 'Book Appointment', 'btn_services': 'Discover Services',
+                'about_tag': 'Our Philosophy', 'about_title': 'Excellence and attention to <span class="text-sage italic">detail.</span>', 'about_p1': 'At Centro Estetico Nanni, we believe beauty comes from harmony. We use top quality products like <strong class="font-medium text-darkText">Selenia</strong> and <strong class="font-medium text-darkText">Masterbeauty</strong> to guarantee visible and lasting results.', 'about_p2': 'Every treatment is a tailor-made experience, designed around your skin\'s specific needs in a relaxing and highly sanitized environment.', 'about_role': 'Founder', 'about_quote': '"Welcoming, professional, and always with a smile to make you feel at the center of our attention."',
+                'serv_tag': 'Our Services', 'serv_title': 'Beauty <span class="text-sage italic">Journeys</span>', 'serv_face': 'Facial Aesthetics', 'serv_body': 'Body Aesthetics', 'serv_base': 'Basic Aesthetics',
+                'li_face1': 'Deep Facial Cleansing', 'li_face2': 'Selenia Anti-Age Treatments', 'li_face3': 'Acids and Peeling', 'li_face4': 'Lash Lamination',
+                'li_body1': 'Relax & Deep Tissue Massages', 'li_body2': 'Lymphatic Drainage', 'li_body3': 'Anti-Cellulite Treatments', 'li_body4': 'Pressotherapy',
+                'li_base1': 'Curative Manicure & Pedicure', 'li_base2': 'Semi-Permanent Polish', 'li_base3': 'Classic Waxing', 'li_base4': 'Sugaring',
+                'port_tag': 'Portfolio', 'port_title': 'Our <span class="text-sage italic">Work</span>',
+                'port_disclaimer': '* The photos in this gallery are for illustrative and layout purposes. They will soon be replaced with the real works of the beauty center.',
+                'port_img1': 'Nail Art & Care', 'port_img2': 'Facial Treatments', 'port_img3': 'Relaxing Massages', 'port_img4': 'Lash Lamination', 'port_img5': 'Advanced Aesthetics', 'port_img6': 'Spa Environment',
+                'book_title': 'Book Your Moment', 'book_p': 'Select your preferred date and time on our smart calendar.', 'book_avail': 'Available Times', 'btn_confirm': 'Confirm Appointment', 'book_or': 'Or book the old fashioned way', 'btn_wa': 'Text us on WhatsApp',
+                'day_1': 'MON', 'day_2': 'TUE', 'day_3': 'WED', 'day_4': 'THU', 'day_5': 'FRI', 'day_6': 'SAT', 'day_7': 'SUN', 'day_2_5': 'Tue - Fri', 'day_7_1': 'Sun - Mon', 'closed': 'Closed',
+                'contact_title': 'Come visit us', 'contact_p': 'Your relaxation space in the heart of Tradate.', 'cont_addr': 'ADDRESS', 'cont_map': 'Open Map', 'cont_hours': 'HOURS',
+                'pop_tag': 'Welcome Offer', 'pop_title': 'Detox Package', 'pop_p': 'Complete purifying face and body treatment to regenerate the skin. One and a half hours of pure relaxation.', 'pop_old': 'Instead of € 110', 'pop_btn': 'Book Now', 'pop_disc': '*Valid for new clients only'
             }
         };
 
-        function toggleLang() {
-            const dd = document.getElementById('lang-dropdown');
-            dd.classList.toggle('open');
+        function changeLang(lang) {
+            document.getElementById('current-lang').innerText = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(i18n[lang] && i18n[lang][key]) {
+                    el.innerHTML = i18n[lang][key]; 
+                }
+            });
         }
 
-        function setLang(lang, event) {
-            event.stopPropagation();
-            document.getElementById('current-lang').innerText = lang.toUpperCase();
-            document.getElementById('lang-dropdown').classList.remove('open');
+        function openOfferPopup() {
+            const popup = document.getElementById('offer-popup');
+            const popupContent = document.getElementById('popup-content');
             
-            document.querySelectorAll('[data-tr]').forEach(el => {
-                const key = el.getAttribute('data-tr');
-                if (dict[lang][key]) {
-                    el.innerText = dict[lang][key];
+            const menu = document.getElementById('mobile-menu');
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+                document.querySelector('#mobile-menu-btn i').classList.remove('fa-xmark', 'text-sage', 'rotate-90');
+                document.querySelector('#mobile-menu-btn i').classList.add('fa-bars');
+            }
+
+            popup.classList.remove('opacity-0', 'invisible');
+            popupContent.classList.remove('scale-95');
+            popupContent.classList.add('scale-100');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Gestione Navigazione a Stanze Sigillate
+            function navigateToHash() {
+                let hash = window.location.hash.substring(1);
+                if (!hash) hash = 'home';
+
+                const target = document.getElementById(hash);
+                
+                if (target && target.classList.contains('page-section')) {
+                    document.querySelectorAll('.page-section').forEach(sec => {
+                        sec.classList.remove('active');
+                    });
+                    
+                    target.classList.add('active');
+                    window.scrollTo(0, 0); // Torna sempre in alto quando cambi stanza
+                }
+
+                const menu = document.getElementById('mobile-menu');
+                const icon = document.querySelector('#mobile-menu-btn i');
+                if (!menu.classList.contains('hidden')) {
+                    menu.classList.add('hidden');
+                    icon.classList.remove('fa-xmark', 'text-sage', 'rotate-90');
+                    icon.classList.add('fa-bars');
+                }
+            }
+
+            window.addEventListener('hashchange', navigateToHash);
+            navigateToHash();
+
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                const icon = btn.querySelector('i');
+                if(menu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('text-sage', 'rotate-90');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                    icon.classList.add('text-sage', 'rotate-90');
                 }
             });
 
-            if (lang === 'en') {
-                setTimeout(openPopup, 600); 
-            }
-        }
+            const popup = document.getElementById('offer-popup');
+            const popupContent = document.getElementById('popup-content');
+            const closePopupBtn = document.getElementById('close-popup');
 
-        document.addEventListener('click', function(e) {
-            const globe = document.querySelector('.fa-globe').parentNode;
-            if (!globe.contains(e.target)) {
-                document.getElementById('lang-dropdown').classList.remove('open');
+            setTimeout(() => {
+                openOfferPopup();
+            }, 3000);
+
+            closePopupBtn.addEventListener('click', closePopup);
+
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) closePopup();
+            });
+
+            function closePopup() {
+                popup.classList.add('opacity-0');
+                popupContent.classList.remove('scale-100');
+                popupContent.classList.add('scale-95');
+                setTimeout(() => {
+                    popup.classList.add('invisible');
+                }, 500);
             }
         });
     </script>
