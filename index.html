@@ -16,12 +16,12 @@
             theme: {
                 extend: {
                     colors: {
-                        sage: '#8AA094', // Verde Salvia elegante
-                        beige: '#DDC9B4', // Beige naturale/legno
-                        light: '#FAFAFA', // Bianco panna
-                        stone: '#F5F5F4', // Grigio chiarissimo
-                        darkText: '#2D3748', // Testo scuro antracite
-                        sageDark: '#6b7d73' // Variante più scura per hover
+                        sage: '#8AA094', 
+                        beige: '#DDC9B4', 
+                        light: '#FAFAFA', 
+                        stone: '#F5F5F4', 
+                        darkText: '#2D3748', 
+                        sageDark: '#6b7d73' 
                     },
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
@@ -36,7 +36,7 @@
         body {
             background-color: #FAFAFA;
             color: #2D3748;
-            overflow-y: scroll; /* Previene i salti di pagina */
+            overflow-y: scroll;
         }
         
         .glass-nav {
@@ -47,28 +47,27 @@
 
         /* Gestione Pagine Separate (SPA) */
         .page-section {
-            display: none; /* Nasconde tutte le sezioni di base */
-            animation: fadeIn 0.5s ease-in-out;
+            display: none; 
+            animation: fadeIn 0.4s ease-in-out;
         }
         .page-section.active {
-            display: block; /* Mostra solo quella attiva */
+            display: block; 
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .service-card {
+        .service-card, .portfolio-card {
             transition: all 0.4s ease;
         }
 
-        .service-card:hover {
+        .service-card:hover, .portfolio-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(138, 160, 148, 0.15);
         }
 
-        /* Effetto sfumatura sulla hero */
         .hero-overlay {
             background: linear-gradient(to right, rgba(250,250,250,0.95) 0%, rgba(250,250,250,0.3) 100%);
         }
@@ -85,17 +84,16 @@
                     <span class="font-serif text-3xl font-semibold text-sage tracking-wider">NANNI</span>
                 </div>
 
-                <!-- Azioni (Mappamondo Hover e Hamburger) -->
+                <!-- Azioni Destra -->
                 <div class="flex items-center space-x-6">
                     
-                    <!-- Language Dropdown (Apre al passaggio del mouse o al tocco) -->
+                    <!-- Traduttore -->
                     <div class="relative group cursor-pointer" id="lang-container">
                         <div class="flex items-center text-darkText hover:text-sage transition p-2">
                             <i class="fa-solid fa-globe mr-2 text-lg"></i>
                             <span id="current-lang" class="font-medium text-sm">IT</span>
                         </div>
                         
-                        <!-- Tendina Lingue con Bandierine -->
                         <div class="absolute right-0 top-full mt-0 w-36 bg-white rounded-md shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 z-50">
                             <button onclick="changeLang('IT')" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-stone hover:text-sage flex items-center">
                                 <span class="mr-3 text-lg">🇮🇹</span> Italiano
@@ -106,7 +104,7 @@
                         </div>
                     </div>
 
-                    <!-- Hamburger Menu (Visibile sempre, su PC e Telefono) -->
+                    <!-- Hamburger Menu -->
                     <button id="mobile-menu-btn" class="text-darkText hover:text-sage focus:outline-none p-2 transition-transform duration-200">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
@@ -114,52 +112,46 @@
             </div>
         </div>
 
-        <!-- Menu a scomparsa a tutto schermo -->
         <div id="mobile-menu" class="hidden bg-white border-t border-gray-100 absolute w-full shadow-2xl origin-top transition-all duration-300 z-40">
             <div class="px-6 py-8 space-y-2 text-center max-w-lg mx-auto">
-                <a href="#home" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Home</a>
-                <a href="#about" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Chi Siamo</a>
-                <a href="#services" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Trattamenti</a>
-                <a href="#contact" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Dove Siamo</a>
+                <a href="#home" data-i18n="menu_home" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Home</a>
+                <a href="#about" data-i18n="menu_about" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Chi Siamo</a>
+                <a href="#services" data-i18n="menu_services" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Trattamenti</a>
+                <a href="#portfolio" data-i18n="menu_portfolio" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">I Nostri Lavori</a>
+                <a href="#contact" data-i18n="menu_contact" class="block px-3 py-4 text-sm font-medium text-darkText hover:bg-stone hover:text-sage uppercase tracking-widest rounded transition">Dove Siamo</a>
                 
-                <!-- Bottone per riaprire l'Offerta -->
-                <button onclick="openOfferPopup()" class="w-full block px-3 py-4 text-sm font-medium text-sage hover:bg-stone uppercase tracking-widest rounded transition mt-2">
+                <button onclick="openOfferPopup()" data-i18n="menu_offer" class="w-full block px-3 py-4 text-sm font-medium text-sage hover:bg-stone uppercase tracking-widest rounded transition mt-2">
                     <i class="fa-solid fa-gift mr-2"></i> Locandina Offerta
                 </button>
 
-                <a href="#booking" class="block px-3 py-4 text-sm font-medium text-white bg-sage hover:bg-sageDark uppercase tracking-widest rounded transition shadow-md mt-4">Prenota Ora</a>
+                <a href="#booking" data-i18n="menu_book" class="block px-3 py-4 text-sm font-medium text-white bg-sage hover:bg-sageDark uppercase tracking-widest rounded transition shadow-md mt-4">Prenota Ora</a>
             </div>
         </div>
     </nav>
 
     <main class="pt-20">
 
-        <!-- ==========================================
-             SEZIONE 1: HOME (Hero)
-             ========================================== -->
         <section id="home" class="page-section active h-[calc(100vh-5rem)]">
             <div class="relative w-full h-full flex items-center">
-                <!-- Background Image -->
                 <div class="absolute inset-0 w-full h-full">
                     <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2000" alt="Spa Background" class="w-full h-full object-cover" />
                     <div class="absolute inset-0 hero-overlay"></div>
                 </div>
                 
-                <!-- Content -->
                 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     <div class="max-w-2xl">
-                        <span class="text-sage uppercase tracking-widest text-sm font-semibold mb-4 block">Tradate, Varese</span>
-                        <h1 class="text-5xl md:text-7xl font-serif text-darkText leading-tight mb-6">
+                        <span data-i18n="hero_city" class="text-sage uppercase tracking-widest text-sm font-semibold mb-4 block">Tradate, Varese</span>
+                        <h1 data-i18n="hero_title" class="text-5xl md:text-7xl font-serif text-darkText leading-tight mb-6">
                             La tua oasi di <br><span class="text-sage italic">benessere.</span>
                         </h1>
-                        <p class="text-lg text-gray-600 mb-10 font-light leading-relaxed max-w-lg">
+                        <p data-i18n="hero_p" class="text-lg text-gray-600 mb-10 font-light leading-relaxed max-w-lg">
                             Riscopri l'equilibrio tra mente e corpo. Trattamenti viso e corpo personalizzati per una bellezza autentica e duratura.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#booking" class="bg-sage text-white px-8 py-4 rounded text-sm uppercase tracking-widest hover:bg-sageDark transition text-center font-medium shadow-lg shadow-sage/30">
+                            <a href="#booking" data-i18n="btn_book" class="bg-sage text-white px-8 py-4 rounded text-sm uppercase tracking-widest hover:bg-sageDark transition text-center font-medium shadow-lg shadow-sage/30">
                                 Prenota Appuntamento
                             </a>
-                            <a href="#services" class="bg-transparent border border-darkText text-darkText px-8 py-4 rounded text-sm uppercase tracking-widest hover:bg-darkText hover:text-white transition text-center font-medium">
+                            <a href="#services" data-i18n="btn_services" class="bg-transparent border border-darkText text-darkText px-8 py-4 rounded text-sm uppercase tracking-widest hover:bg-darkText hover:text-white transition text-center font-medium">
                                 Scopri i Servizi
                             </a>
                         </div>
@@ -168,39 +160,34 @@
             </div>
         </section>
 
-        <!-- ==========================================
-             SEZIONE 2: CHI SIAMO
-             ========================================== -->
         <section id="about" class="page-section py-20 bg-white min-h-[calc(100vh-5rem)]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <span class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">La Nostra Filosofia</span>
-                    <h2 class="text-4xl font-serif text-darkText mb-6">Eccellenza e cura del <span class="text-sage italic">dettaglio.</span></h2>
+                    <span data-i18n="about_tag" class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">La Nostra Filosofia</span>
+                    <h2 data-i18n="about_title" class="text-4xl font-serif text-darkText mb-6">Eccellenza e cura del <span class="text-sage italic">dettaglio.</span></h2>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <!-- Immagine Salone -->
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000" alt="Interno Centro Estetico" class="rounded-lg shadow-xl w-full h-[500px] object-cover" />
+                        <!-- Immagine Aggiornata (Lettino Trattamenti Luminoso) -->
+                        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1000" alt="Cabina Trattamenti Estetici" class="rounded-lg shadow-xl w-full h-[500px] object-cover" />
                         <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-stone rounded-full -z-10 hidden md:block"></div>
                     </div>
                     
-                    <!-- Testo & Annamaria -->
                     <div>
-                        <p class="text-gray-600 mb-6 font-light leading-relaxed text-lg">
+                        <p data-i18n="about_p1" class="text-gray-600 mb-6 font-light leading-relaxed text-lg">
                             Al Centro Estetico Nanni, crediamo che la bellezza nasca dall'armonia. Utilizziamo prodotti di altissima qualità come <strong class="font-medium text-darkText">Selenia</strong> e <strong class="font-medium text-darkText">Masterbeauty</strong> per garantirti risultati visibili e duraturi.
                         </p>
-                        <p class="text-gray-600 mb-10 font-light leading-relaxed">
+                        <p data-i18n="about_p2" class="text-gray-600 mb-10 font-light leading-relaxed">
                             Ogni trattamento è un'esperienza su misura, studiata sulle esigenze specifiche della tua pelle in un ambiente rilassante e igienizzato con i massimi standard.
                         </p>
                         
-                        <!-- Profilo Annamaria -->
                         <div class="flex items-center p-6 bg-stone rounded-xl border-l-4 border-sage shadow-sm">
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200" alt="Annamaria Vitaliti" class="w-20 h-20 rounded-full object-cover mr-5 shadow-md border-2 border-white" />
                             <div>
                                 <h4 class="font-serif text-xl text-darkText font-medium">Annamaria Vitaliti</h4>
-                                <p class="text-xs text-sage uppercase tracking-wider mb-2 font-semibold">Fondatrice</p>
-                                <p class="text-sm text-gray-500 italic">"Accoglienza, professionalità e un sorriso per farvi sentire sempre al centro della nostra attenzione."</p>
+                                <p data-i18n="about_role" class="text-xs text-sage uppercase tracking-wider mb-2 font-semibold">Fondatrice</p>
+                                <p data-i18n="about_quote" class="text-sm text-gray-500 italic">"Accoglienza, professionalità e un sorriso per farvi sentire sempre al centro della nostra attenzione."</p>
                             </div>
                         </div>
                     </div>
@@ -208,25 +195,22 @@
             </div>
         </section>
 
-        <!-- ==========================================
-             SEZIONE 3: TRATTAMENTI
-             ========================================== -->
         <section id="services" class="page-section py-20 bg-stone min-h-[calc(100vh-5rem)]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <span class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">I Nostri Servizi</span>
-                <h2 class="text-4xl font-serif text-darkText mb-16">Percorsi di <span class="text-sage italic">Bellezza</span></h2>
+                <span data-i18n="serv_tag" class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">I Nostri Servizi</span>
+                <h2 data-i18n="serv_title" class="text-4xl font-serif text-darkText mb-16">Percorsi di <span class="text-sage italic">Bellezza</span></h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Viso -->
                     <div class="service-card bg-white p-10 rounded-xl text-left shadow-md border border-gray-100 relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-24 h-24 bg-sage/5 rounded-bl-full z-0"></div>
                         <i class="fa-solid fa-spa text-4xl text-beige mb-6 relative z-10"></i>
-                        <h3 class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Viso</h3>
+                        <h3 data-i18n="serv_face" class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Viso</h3>
                         <ul class="text-gray-500 font-light space-y-4 mb-6 relative z-10">
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Pulizia Viso Profonda</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Trattamenti Anti-Age Selenia</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Acidi e Peeling</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Laminazione Ciglia</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_face1">Pulizia Viso Profonda</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_face2">Trattamenti Anti-Age Selenia</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_face3">Acidi e Peeling</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_face4">Laminazione Ciglia</span></li>
                         </ul>
                     </div>
 
@@ -234,12 +218,12 @@
                     <div class="service-card bg-white p-10 rounded-xl text-left shadow-md border border-gray-100 relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-24 h-24 bg-sage/5 rounded-bl-full z-0"></div>
                         <i class="fa-solid fa-leaf text-4xl text-beige mb-6 relative z-10"></i>
-                        <h3 class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Corpo</h3>
+                        <h3 data-i18n="serv_body" class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Corpo</h3>
                         <ul class="text-gray-500 font-light space-y-4 mb-6 relative z-10">
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Massaggi Relax & Decontratturanti</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Linfodrenaggio</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Trattamenti Anticellulite</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Pressoterapia</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_body1">Massaggi Relax & Decontratturanti</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_body2">Linfodrenaggio</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_body3">Trattamenti Anticellulite</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_body4">Pressoterapia</span></li>
                         </ul>
                     </div>
 
@@ -247,31 +231,49 @@
                     <div class="service-card bg-white p-10 rounded-xl text-left shadow-md border border-gray-100 relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-24 h-24 bg-sage/5 rounded-bl-full z-0"></div>
                         <i class="fa-solid fa-hand-sparkles text-4xl text-beige mb-6 relative z-10"></i>
-                        <h3 class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Base</h3>
+                        <h3 data-i18n="serv_base" class="text-xl font-serif text-darkText mb-4 relative z-10">Estetica Base</h3>
                         <ul class="text-gray-500 font-light space-y-4 mb-6 relative z-10">
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Manicure & Pedicure Curativo</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Smalto Semipermanente</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Epilazione Classica</li>
-                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> Epilazione Pasta di Zucchero</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_base1">Manicure & Pedicure Curativo</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_base2">Smalto Semipermanente</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_base3">Epilazione Classica</span></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sage text-xs mr-3"></i> <span data-i18n="li_base4">Epilazione Pasta di Zucchero</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==========================================
-             SEZIONE 4: PRENOTA
-             ========================================== -->
-        <section id="booking" class="page-section py-20 bg-white min-h-[calc(100vh-5rem)]">
+        <section id="portfolio" class="page-section py-20 bg-white min-h-[calc(100vh-5rem)]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span data-i18n="port_tag" class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">Portfolio</span>
+                <h2 data-i18n="port_title" class="text-4xl font-serif text-darkText mb-16">I Nostri <span class="text-sage italic">Lavori</span></h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="portfolio-card aspect-square rounded-xl overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?q=80&w=800" alt="Nails Art" class="w-full h-full object-cover">
+                    </div>
+                    <div class="portfolio-card aspect-square rounded-xl overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1512496015851-a9083842137e?q=80&w=800" alt="Lashes and Face" class="w-full h-full object-cover">
+                    </div>
+                    <div class="portfolio-card aspect-square rounded-xl overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800" alt="Body Massage" class="w-full h-full object-cover">
+                    </div>
+                    <div class="portfolio-card aspect-square rounded-xl overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=800" alt="Skincare Facial" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="page-section py-20 bg-stone min-h-[calc(100vh-5rem)]">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-stone p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-gray-100">
                     <div class="text-center mb-10">
-                        <h2 class="text-3xl font-serif text-darkText mb-4">Prenota il tuo Momento</h2>
-                        <p class="text-gray-500 font-light">Seleziona data e ora preferita sul nostro calendario intelligente.</p>
+                        <h2 data-i18n="book_title" class="text-3xl font-serif text-darkText mb-4">Prenota il tuo Momento</h2>
+                        <p data-i18n="book_p" class="text-gray-500 font-light">Seleziona data e ora preferita sul nostro calendario intelligente.</p>
                     </div>
 
-                    <!-- Mockup Calendario -->
-                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-8">
+                    <div class="bg-stone rounded-xl p-6 shadow-inner border border-gray-200 mb-8">
                         <div class="flex justify-between items-center mb-6">
                             <button class="text-gray-400 hover:text-sage transition"><i class="fa-solid fa-chevron-left"></i></button>
                             <span class="font-medium text-darkText uppercase tracking-widest text-sm">Novembre 2026</span>
@@ -279,15 +281,14 @@
                         </div>
                         
                         <div class="grid grid-cols-7 gap-2 text-center mb-6">
-                            <div class="text-xs text-gray-400 font-semibold">LUN</div>
-                            <div class="text-xs text-gray-400 font-semibold">MAR</div>
-                            <div class="text-xs text-gray-400 font-semibold">MER</div>
-                            <div class="text-xs text-gray-400 font-semibold">GIO</div>
-                            <div class="text-xs text-gray-400 font-semibold">VEN</div>
-                            <div class="text-xs text-gray-400 font-semibold">SAB</div>
-                            <div class="text-xs text-gray-400 font-semibold">DOM</div>
+                            <div data-i18n="day_1" class="text-xs text-gray-400 font-semibold">LUN</div>
+                            <div data-i18n="day_2" class="text-xs text-gray-400 font-semibold">MAR</div>
+                            <div data-i18n="day_3" class="text-xs text-gray-400 font-semibold">MER</div>
+                            <div data-i18n="day_4" class="text-xs text-gray-400 font-semibold">GIO</div>
+                            <div data-i18n="day_5" class="text-xs text-gray-400 font-semibold">VEN</div>
+                            <div data-i18n="day_6" class="text-xs text-gray-400 font-semibold">SAB</div>
+                            <div data-i18n="day_7" class="text-xs text-gray-400 font-semibold">DOM</div>
                             
-                            <!-- Dummy Dates -->
                             <div class="py-2 text-gray-300 text-sm">26</div>
                             <div class="py-2 text-gray-300 text-sm">27</div>
                             <div class="py-2 text-gray-300 text-sm">28</div>
@@ -303,92 +304,87 @@
                             <div class="py-2 text-gray-300 text-sm">7</div>
                         </div>
 
-                        <div class="border-t border-gray-100 pt-6">
-                            <span class="block text-xs text-gray-400 mb-3 uppercase tracking-wider font-semibold">Orari Disponibili</span>
+                        <div class="border-t border-gray-200 pt-6">
+                            <span data-i18n="book_avail" class="block text-xs text-gray-400 mb-3 uppercase tracking-wider font-semibold">Orari Disponibili</span>
                             <div class="flex flex-wrap gap-3">
-                                <button class="px-4 py-2 border border-gray-200 text-sm text-gray-600 rounded hover:border-sage hover:text-sage transition">09:30</button>
+                                <button class="px-4 py-2 border border-gray-300 text-sm text-gray-600 rounded hover:border-sage hover:text-sage bg-white transition">09:30</button>
                                 <button class="px-4 py-2 border border-sage bg-sage/10 text-sm text-sage rounded font-medium shadow-sm">11:00</button>
-                                <button class="px-4 py-2 border border-gray-200 text-sm text-gray-600 rounded hover:border-sage hover:text-sage transition">15:00</button>
-                                <button class="px-4 py-2 border border-gray-200 text-sm text-gray-600 rounded hover:border-sage hover:text-sage transition">17:30</button>
+                                <button class="px-4 py-2 border border-gray-300 text-sm text-gray-600 rounded hover:border-sage hover:text-sage bg-white transition">15:00</button>
+                                <button class="px-4 py-2 border border-gray-300 text-sm text-gray-600 rounded hover:border-sage hover:text-sage bg-white transition">17:30</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Azioni e WhatsApp -->
                     <div class="text-center flex flex-col items-center">
-                        <button class="w-full bg-sage text-white py-4 rounded text-sm uppercase tracking-widest hover:bg-sageDark transition font-medium shadow-lg mb-6">
+                        <button data-i18n="btn_confirm" class="w-full bg-sage text-white py-4 rounded text-sm uppercase tracking-widest hover:bg-sageDark transition font-medium shadow-lg mb-6">
                             Conferma Appuntamento
                         </button>
 
                         <div class="w-full flex items-center justify-center mb-6 max-w-sm">
-                            <div class="h-px bg-gray-300 flex-1"></div>
-                            <span class="px-4 text-xs text-gray-500 uppercase tracking-widest font-medium">Oppure prenota alla vecchia maniera</span>
-                            <div class="h-px bg-gray-300 flex-1"></div>
+                            <div class="h-px bg-gray-200 flex-1"></div>
+                            <span data-i18n="book_or" class="px-4 text-xs text-gray-400 uppercase tracking-widest font-medium">Oppure prenota alla vecchia maniera</span>
+                            <div class="h-px bg-gray-200 flex-1"></div>
                         </div>
                         
-                        <!-- Bottone WhatsApp Diretto col Numero Vero -->
-                        <a href="https://wa.me/393756330365" target="_blank" class="w-full md:w-auto bg-[#25D366] text-white px-10 py-4 rounded-full text-sm font-bold tracking-wide hover:bg-[#20b858] transition flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            <i class="fa-brands fa-whatsapp text-2xl mr-3"></i> Scrivici su WhatsApp
+                        <a href="https://wa.me/393756330365" target="_blank" class="w-full md:w-auto bg-[#25D366] text-white px-10 py-4 rounded-full text-sm font-bold tracking-wide hover:bg-[#20b858] transition flex items-center justify-center shadow-md transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp text-2xl mr-3"></i> <span data-i18n="btn_wa">Scrivici su WhatsApp</span>
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==========================================
-             SEZIONE 5: DOVE SIAMO
-             ========================================== -->
-        <section id="contact" class="page-section bg-darkText text-white min-h-[calc(100vh-5rem)]">
-            <div class="flex items-center w-full h-full py-20">
+        <section id="contact" class="page-section bg-darkText text-white min-h-[calc(100vh-5rem)] flex flex-col justify-between">
+            <div class="py-20 flex-grow flex items-center">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     
                     <div class="text-center mb-16">
-                        <h2 class="text-5xl font-serif text-sage mb-4">Vieni a trovarci</h2>
-                        <p class="text-gray-400 font-light text-lg">Il tuo spazio di relax nel cuore di Tradate.</p>
+                        <h2 data-i18n="contact_title" class="text-5xl font-serif text-sage mb-4">Vieni a trovarci</h2>
+                        <p data-i18n="contact_p" class="text-gray-400 font-light text-lg">Il tuo spazio di relax nel cuore di Tradate.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 text-center md:text-left">
-                        <!-- Info -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 text-center md:text-left max-w-4xl mx-auto">
                         <div class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
                             <i class="fa-solid fa-location-dot text-3xl text-beige mb-6"></i>
-                            <h4 class="font-medium text-xl mb-4 tracking-wider text-white">INDIRIZZO</h4>
-                            <p class="text-gray-400 font-light leading-relaxed mb-6">
+                            <h4 data-i18n="cont_addr" class="font-medium text-xl mb-4 tracking-wider text-white">INDIRIZZO</h4>
+                            <p class="text-gray-400 font-light leading-relaxed mb-4">
                                 Via dei Pradacci 3<br>
                                 21049 Tradate (VA)
                             </p>
-                            <a href="https://wa.me/393756330365" target="_blank" class="text-sage hover:text-white transition flex items-center justify-center md:justify-start font-medium text-lg">
-                                <i class="fa-brands fa-whatsapp mr-3 text-2xl"></i> +39 375 633 0365
+                            <!-- Bottone per aprire Google Maps -->
+                            <a href="https://www.google.com/maps/search/?api=1&query=Via+dei+Pradacci+3,+Tradate" target="_blank" class="inline-flex items-center text-sage hover:text-white transition text-sm font-medium uppercase tracking-widest mb-6">
+                                <i class="fa-solid fa-map text-lg mr-2"></i> <span data-i18n="cont_map">Apri Mappa</span>
+                            </a>
+                            <br>
+                            <a href="https://wa.me/393756330365" target="_blank" class="text-white hover:text-sage transition flex items-center justify-center md:justify-start font-medium text-lg mt-4 border-t border-gray-700 pt-6">
+                                <i class="fa-brands fa-whatsapp mr-3 text-2xl text-[#25D366]"></i> +39 375 633 0365
                             </a>
                         </div>
                         
-                        <!-- Orari -->
                         <div class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
                             <i class="fa-solid fa-clock text-3xl text-beige mb-6"></i>
-                            <h4 class="font-medium text-xl mb-4 tracking-wider text-white">ORARI</h4>
+                            <h4 data-i18n="cont_hours" class="font-medium text-xl mb-4 tracking-wider text-white">ORARI</h4>
                             <ul class="text-gray-400 font-light space-y-4">
-                                <li class="flex justify-between border-b border-gray-700 pb-2"><span>Martedì - Venerdì</span> <span>09:30 - 19:30</span></li>
-                                <li class="flex justify-between border-b border-gray-700 pb-2"><span>Sabato</span> <span>09:00 - 18:00</span></li>
-                                <li class="flex justify-between text-sage pt-2"><span>Domenica e Lunedì</span> <span>Chiuso</span></li>
+                                <li class="flex justify-between border-b border-gray-700 pb-2"><span data-i18n="day_2_5">Mar - Ven</span> <span>09:30 - 19:30</span></li>
+                                <li class="flex justify-between border-b border-gray-700 pb-2"><span data-i18n="day_6">SAB</span> <span>09:00 - 18:00</span></li>
+                                <li class="flex justify-between text-sage pt-2"><span data-i18n="day_7_1">Dom - Lun</span> <span data-i18n="closed">Chiuso</span></li>
                             </ul>
                         </div>
-                        
-                        <!-- Socials -->
-                        <div class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700 flex flex-col items-center md:items-start justify-center">
-                            <h4 class="font-medium text-xl mb-6 tracking-wider text-white">SEGUICI SUI SOCIAL</h4>
-                            <p class="text-gray-400 font-light mb-8 text-center md:text-left">Rimani aggiornata sulle nostre offerte e scopri i risultati dei nostri trattamenti.</p>
-                            <div class="flex space-x-6">
-                                <a href="https://www.instagram.com/" target="_blank" class="w-14 h-14 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 transition text-white shadow-lg transform hover:scale-110">
-                                    <i class="fa-brands fa-instagram text-2xl"></i>
-                                </a>
-                                <a href="https://www.facebook.com/" target="_blank" class="w-14 h-14 rounded-full bg-gray-700 flex items-center justify-center hover:bg-[#1877F2] transition text-white shadow-lg transform hover:scale-110">
-                                    <i class="fa-brands fa-facebook-f text-2xl"></i>
-                                </a>
-                            </div>
-                        </div>
                     </div>
-                    
-                    <div class="border-t border-gray-800 mt-20 pt-8 text-center text-sm text-gray-500 font-light tracking-wide">
-                        &copy; 2026 Centro Estetico Nanni. Tutti i diritti riservati.
+                </div>
+            </div>
+
+            <!-- Footer con Social Piccoli in Basso -->
+            <div class="w-full bg-gray-900 py-6 border-t border-gray-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 font-light">
+                    <span class="mb-4 md:mb-0">&copy; 2026 @ Centro Estetico Nanni</span>
+                    <div class="flex space-x-5">
+                        <a href="https://www.instagram.com/explore/search/keyword/?q=Centro%20Estetico%20Nanni" target="_blank" class="hover:text-sage transition flex items-center">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </a>
+                        <a href="https://www.facebook.com/search/top?q=centro%20estetico%20nanni" target="_blank" class="hover:text-sage transition flex items-center">
+                            <i class="fa-brands fa-facebook-f text-lg"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -396,7 +392,6 @@
 
     </main>
 
-    <!-- Special Offer Popup Overlay -->
     <div id="offer-popup" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[70] flex items-center justify-center opacity-0 invisible transition-all duration-500">
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden transform scale-95 transition-transform duration-500 relative" id="popup-content">
             
@@ -410,31 +405,68 @@
             </div>
             
             <div class="p-8 text-center -mt-8 relative z-10">
-                <span class="bg-sage text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 inline-block shadow-md">Offerta Benvenuto</span>
-                <h4 class="text-3xl font-serif text-darkText mb-3">Pacchetto Detox</h4>
-                <p class="text-gray-500 text-base mb-6 font-light leading-relaxed">Trattamento purificante viso e corpo completo per rigenerare la pelle. Un'ora e mezza di puro relax.</p>
-                <div class="text-4xl font-serif text-sage mb-8">€ 75 <span class="text-sm text-gray-400 line-through font-sans block md:inline md:ml-2">Invece di € 110</span></div>
+                <span data-i18n="pop_tag" class="bg-sage text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 inline-block shadow-md">Offerta Benvenuto</span>
+                <h4 data-i18n="pop_title" class="text-3xl font-serif text-darkText mb-3">Pacchetto Detox</h4>
+                <p data-i18n="pop_p" class="text-gray-500 text-base mb-6 font-light leading-relaxed">Trattamento purificante viso e corpo completo per rigenerare la pelle. Un'ora e mezza di puro relax.</p>
+                <div class="text-4xl font-serif text-sage mb-8">€ 75 <span data-i18n="pop_old" class="text-sm text-gray-400 line-through font-sans block md:inline md:ml-2">Invece di € 110</span></div>
                 
                 <a href="https://wa.me/393756330365?text=Salve,%20vorrei%20prenotare%20il%20Pacchetto%20Detox%20da%2075%E2%82%AC%20visto%20sul%20sito!" target="_blank" class="block w-full bg-[#25D366] text-white py-4 rounded-xl text-sm font-bold tracking-wide hover:bg-[#20b858] transition shadow-lg flex items-center justify-center">
-                    <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Prenota Subito
+                    <i class="fa-brands fa-whatsapp text-xl mr-2"></i> <span data-i18n="pop_btn">Prenota Subito</span>
                 </a>
-                <p class="text-xs text-gray-400 mt-5 font-light">*Valido solo per le nuove clienti</p>
+                <p data-i18n="pop_disc" class="text-xs text-gray-400 mt-5 font-light">*Valido solo per le nuove clienti</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Funzione per cambiare lingua
+        // DIZIONARIO TRADUZIONI (Vero multilingua)
+        const i18n = {
+            'IT': {
+                'menu_home': 'Home', 'menu_about': 'Chi Siamo', 'menu_services': 'Trattamenti', 'menu_portfolio': 'I Nostri Lavori', 'menu_contact': 'Dove Siamo', 'menu_offer': 'Locandina Offerta', 'menu_book': 'Prenota Ora',
+                'hero_city': 'Tradate, Varese', 'hero_title': 'La tua oasi di <br><span class="text-sage italic">benessere.</span>', 'hero_p': 'Riscopri l\'equilibrio tra mente e corpo. Trattamenti viso e corpo personalizzati per una bellezza autentica e duratura.', 'btn_book': 'Prenota Appuntamento', 'btn_services': 'Scopri i Servizi',
+                'about_tag': 'La Nostra Filosofia', 'about_title': 'Eccellenza e cura del <span class="text-sage italic">dettaglio.</span>', 'about_p1': 'Al Centro Estetico Nanni, crediamo che la bellezza nasca dall\'armonia. Utilizziamo prodotti di altissima qualità come <strong class="font-medium text-darkText">Selenia</strong> e <strong class="font-medium text-darkText">Masterbeauty</strong> per garantirti risultati visibili e duraturi.', 'about_p2': 'Ogni trattamento è un\'esperienza su misura, studiata sulle esigenze specifiche della tua pelle in un ambiente rilassante e igienizzato con i massimi standard.', 'about_role': 'Fondatrice', 'about_quote': '"Accoglienza, professionalità e un sorriso per farvi sentire sempre al centro della nostra attenzione."',
+                'serv_tag': 'I Nostri Servizi', 'serv_title': 'Percorsi di <span class="text-sage italic">Bellezza</span>', 'serv_face': 'Estetica Viso', 'serv_body': 'Estetica Corpo', 'serv_base': 'Estetica Base',
+                'li_face1': 'Pulizia Viso Profonda', 'li_face2': 'Trattamenti Anti-Age Selenia', 'li_face3': 'Acidi e Peeling', 'li_face4': 'Laminazione Ciglia',
+                'li_body1': 'Massaggi Relax & Decontratturanti', 'li_body2': 'Linfodrenaggio', 'li_body3': 'Trattamenti Anticellulite', 'li_body4': 'Pressoterapia',
+                'li_base1': 'Manicure & Pedicure Curativo', 'li_base2': 'Smalto Semipermanente', 'li_base3': 'Epilazione Classica', 'li_base4': 'Epilazione Pasta di Zucchero',
+                'port_tag': 'Portfolio', 'port_title': 'I Nostri <span class="text-sage italic">Lavori</span>',
+                'book_title': 'Prenota il tuo Momento', 'book_p': 'Seleziona data e ora preferita sul nostro calendario intelligente.', 'book_avail': 'Orari Disponibili', 'btn_confirm': 'Conferma Appuntamento', 'book_or': 'Oppure prenota alla vecchia maniera', 'btn_wa': 'Scrivici su WhatsApp',
+                'day_1': 'LUN', 'day_2': 'MAR', 'day_3': 'MER', 'day_4': 'GIO', 'day_5': 'VEN', 'day_6': 'SAB', 'day_7': 'DOM', 'day_2_5': 'Mar - Ven', 'day_7_1': 'Dom - Lun', 'closed': 'Chiuso',
+                'contact_title': 'Vieni a trovarci', 'contact_p': 'Il tuo spazio di relax nel cuore di Tradate.', 'cont_addr': 'INDIRIZZO', 'cont_map': 'Apri Mappa', 'cont_hours': 'ORARI',
+                'pop_tag': 'Offerta Benvenuto', 'pop_title': 'Pacchetto Detox', 'pop_p': 'Trattamento purificante viso e corpo completo per rigenerare la pelle. Un\'ora e mezza di puro relax.', 'pop_old': 'Invece di € 110', 'pop_btn': 'Prenota Subito', 'pop_disc': '*Valido solo per le nuove clienti'
+            },
+            'EN': {
+                'menu_home': 'Home', 'menu_about': 'About Us', 'menu_services': 'Treatments', 'menu_portfolio': 'Our Work', 'menu_contact': 'Location', 'menu_offer': 'Special Offer', 'menu_book': 'Book Now',
+                'hero_city': 'Tradate, Italy', 'hero_title': 'Your oasis of <br><span class="text-sage italic">wellbeing.</span>', 'hero_p': 'Rediscover the balance between mind and body. Personalized face and body treatments for authentic and lasting beauty.', 'btn_book': 'Book Appointment', 'btn_services': 'Discover Services',
+                'about_tag': 'Our Philosophy', 'about_title': 'Excellence and attention to <span class="text-sage italic">detail.</span>', 'about_p1': 'At Centro Estetico Nanni, we believe beauty comes from harmony. We use top quality products like <strong class="font-medium text-darkText">Selenia</strong> and <strong class="font-medium text-darkText">Masterbeauty</strong> to guarantee visible and lasting results.', 'about_p2': 'Every treatment is a tailor-made experience, designed around your skin\'s specific needs in a relaxing and highly sanitized environment.', 'about_role': 'Founder', 'about_quote': '"Welcoming, professional, and always with a smile to make you feel at the center of our attention."',
+                'serv_tag': 'Our Services', 'serv_title': 'Beauty <span class="text-sage italic">Journeys</span>', 'serv_face': 'Facial Aesthetics', 'serv_body': 'Body Aesthetics', 'serv_base': 'Basic Aesthetics',
+                'li_face1': 'Deep Facial Cleansing', 'li_face2': 'Selenia Anti-Age Treatments', 'li_face3': 'Acids and Peeling', 'li_face4': 'Lash Lamination',
+                'li_body1': 'Relax & Deep Tissue Massages', 'li_body2': 'Lymphatic Drainage', 'li_body3': 'Anti-Cellulite Treatments', 'li_body4': 'Pressotherapy',
+                'li_base1': 'Curative Manicure & Pedicure', 'li_base2': 'Semi-Permanent Polish', 'li_base3': 'Classic Waxing', 'li_base4': 'Sugaring',
+                'port_tag': 'Portfolio', 'port_title': 'Our <span class="text-sage italic">Work</span>',
+                'book_title': 'Book Your Moment', 'book_p': 'Select your preferred date and time on our smart calendar.', 'book_avail': 'Available Times', 'btn_confirm': 'Confirm Appointment', 'book_or': 'Or book the old fashioned way', 'btn_wa': 'Text us on WhatsApp',
+                'day_1': 'MON', 'day_2': 'TUE', 'day_3': 'WED', 'day_4': 'THU', 'day_5': 'FRI', 'day_6': 'SAT', 'day_7': 'SUN', 'day_2_5': 'Tue - Fri', 'day_7_1': 'Sun - Mon', 'closed': 'Closed',
+                'contact_title': 'Come visit us', 'contact_p': 'Your relaxation space in the heart of Tradate.', 'cont_addr': 'ADDRESS', 'cont_map': 'Open Map', 'cont_hours': 'HOURS',
+                'pop_tag': 'Welcome Offer', 'pop_title': 'Detox Package', 'pop_p': 'Complete purifying face and body treatment to regenerate the skin. One and a half hours of pure relaxation.', 'pop_old': 'Instead of € 110', 'pop_btn': 'Book Now', 'pop_disc': '*Valid for new clients only'
+            }
+        };
+
+        // Funzione Traduzione Attiva
         function changeLang(lang) {
             document.getElementById('current-lang').innerText = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(i18n[lang] && i18n[lang][key]) {
+                    el.innerHTML = i18n[lang][key]; // innerHTML per mantenere br e span!
+                }
+            });
         }
 
-        // Funzione per aprire il popup
         function openOfferPopup() {
             const popup = document.getElementById('offer-popup');
             const popupContent = document.getElementById('popup-content');
             
-            // Chiudi il menu prima di aprire il popup
             const menu = document.getElementById('mobile-menu');
             if (!menu.classList.contains('hidden')) {
                 menu.classList.add('hidden');
@@ -449,25 +481,22 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- GESTIONE NAVIGAZIONE "APP STYLE" (Senza ricaricare pagina) ---
+            // Gestione Navigazione a "Stanze"
             function navigateToHash() {
                 let hash = window.location.hash.substring(1);
-                if (!hash) hash = 'home'; // Default pagina
+                if (!hash) hash = 'home';
 
                 const target = document.getElementById(hash);
                 
                 if (target && target.classList.contains('page-section')) {
-                    // Nascondi tutte le sezioni
                     document.querySelectorAll('.page-section').forEach(sec => {
                         sec.classList.remove('active');
                     });
                     
-                    // Mostra la sezione scelta e scrolla in cima
                     target.classList.add('active');
                     window.scrollTo(0, 0);
                 }
 
-                // Chiudi sempre il menu dopo aver cliccato
                 const menu = document.getElementById('mobile-menu');
                 const icon = document.querySelector('#mobile-menu-btn i');
                 if (!menu.classList.contains('hidden')) {
@@ -477,13 +506,10 @@
                 }
             }
 
-            // Ascolta i cambiamenti dell'URL (quando clicchi i link)
             window.addEventListener('hashchange', navigateToHash);
-            
-            // Esegui al primo caricamento per mostrare la Home
             navigateToHash();
 
-            // --- GESTIONE MENU AD HAMBURGER ---
+            // Menu Hamburger
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
             
@@ -501,12 +527,11 @@
                 }
             });
 
-            // --- POPUP AUTOMATICO E CHIUSURA ---
+            // Popup Logic
             const popup = document.getElementById('offer-popup');
             const popupContent = document.getElementById('popup-content');
             const closePopupBtn = document.getElementById('close-popup');
 
-            // Mostra il popup da solo dopo 3 secondi (solo la prima volta)
             setTimeout(() => {
                 openOfferPopup();
             }, 3000);
