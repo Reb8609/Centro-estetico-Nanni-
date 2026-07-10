@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro Estetico Nanni | La tua oasi di benessere a Tradate</title>
+    <title>Centro Estetico Nanni | La tua Oasi di Benessere a Tradate</title>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
-        // Custom Colors Configuration for "Nanni" (Natural, Relaxing, Sage/Beige)
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        sage: '#8AA094', // Verde Salvia elegante
-                        beige: '#DDC9B4', // Beige naturale/legno
-                        light: '#FAFAFA', // Bianco panna
-                        stone: '#F5F5F4', // Grigio chiarissimo
-                        darkText: '#2D3748', // Testo scuro antracite
-                        sageDark: '#6b7d73'
+                        sage: '#8AA094',      // Verde Salvia Elegante
+                        sageDark: '#6b7d73',  // Verde Salvia Scuro
+                        beige: '#DDC9B4',     // Beige Naturale/Legno
+                        light: '#FAFAFA',     // Bianco Puro
+                        stone: '#F5F5F4',     // Grigio Chiarissimo
+                        darkText: '#2D3748',  // Testo Antracite
                     },
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
@@ -33,530 +36,417 @@
             }
         }
     </script>
-    
+
     <style>
-        .page-section { transition: opacity 0.4s ease-in-out; }
-        body { background-color: #FAFAFA; color: #2D3748; font-family: 'Montserrat', sans-serif; }
+        body { background-color: #FAFAFA; color: #2D3748; }
+        html { scroll-behavior: smooth; }
         
-        #hero-media-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-        #hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            animation: slowZoom 20s infinite alternate linear; 
+        .glass-nav {
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 160, 148, 0.2);
         }
 
-        @keyframes slowZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
+        .fade-in { animation: fadeIn 1s ease-in forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Anti-Google Translate Banner CSS */
-        .goog-te-banner-frame,
-        .goog-te-banner-frame.skiptranslate,
-        .VIpgJd-ZVi9od-ORHb-OEVmcd,
-        .skiptranslate > iframe { display: none !important; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FAFAFA; }
+        ::-webkit-scrollbar-thumb { background: #8AA094; border-radius: 4px; }
         
-        body { top: 0px !important; position: static !important; margin-top: 0px !important; }
-        html { top: 0px !important; height: auto !important; }
-        
-        #goog-gt-tt { display: none !important; top: 0px !important; }
-        .goog-tooltip { display: none !important; }
-        .goog-tooltip:hover { display: none !important; }
-        .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
+        .time-slot.selected {
+            background-color: #8AA094;
+            color: white;
+            border-color: #8AA094;
+        }
     </style>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            // Set base language to Italian
-            new google.translate.TranslateElement({pageLanguage: 'it', autoDisplay: false}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </head>
-<body class="antialiased selection:bg-sage selection:text-white">
+<body class="font-sans antialiased">
 
-    <div id="google_translate_element" style="display:none;"></div>
-
-    <nav class="fixed w-full z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300 shadow-sm" id="navbar">
+    <nav class="glass-nav fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
+                
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="#" onclick="navigate(event, 'home')" class="font-serif text-2xl font-bold tracking-widest text-darkText uppercase" translate="no">
-                        Estetica <span class="text-sage">Nanni</span>
-                    </a>
+                    <span class="font-serif text-2xl font-semibold text-darkText tracking-wider">NANNI</span>
                 </div>
-                
+
                 <!-- Desktop Menu -->
-                <div class="hidden xl:flex space-x-5 items-center ml-auto">
-                    <a href="#" onclick="navigate(event, 'home')" class="text-gray-600 hover:text-sage transition-colors text-sm uppercase tracking-wider font-semibold">Home</a>
-                    <a href="#" onclick="navigate(event, 'services')" class="text-gray-600 hover:text-sage transition-colors text-sm uppercase tracking-wider font-semibold">Trattamenti</a>
-                    <a href="#" onclick="navigate(event, 'about')" class="text-gray-600 hover:text-sage transition-colors text-sm uppercase tracking-wider font-semibold">Il Centro</a>
-                    <a href="#" onclick="navigate(event, 'portfolio')" class="text-gray-600 hover:text-sage transition-colors text-sm uppercase tracking-wider font-semibold">Lavori</a>
-                    <a href="#" onclick="navigate(event, 'contact')" class="text-gray-600 hover:text-sage transition-colors text-sm uppercase tracking-wider font-semibold">Contatti</a>
-                    <a href="#" onclick="navigate(event, 'booking')" class="text-gray-600 hover:text-sage transition-colors text-sm uppercase tracking-wider font-semibold">Prenota</a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-darkText hover:text-sage transition text-sm font-medium uppercase tracking-widest">Home</a>
+                    <a href="#about" class="text-darkText hover:text-sage transition text-sm font-medium uppercase tracking-widest">Chi Siamo</a>
+                    <a href="#services" class="text-darkText hover:text-sage transition text-sm font-medium uppercase tracking-widest">Servizi</a>
+                    <a href="#booking" class="text-darkText hover:text-sage transition text-sm font-medium uppercase tracking-widest">Prenota</a>
                     
-                    <div class="relative group ml-2 mr-2 border-l border-gray-200 pl-4" translate="no">
-                        <button class="flex items-center text-gray-600 hover:text-sage text-sm font-bold uppercase tracking-wider focus:outline-none">
-                            <i class="fa-solid fa-globe mr-1 text-sage"></i> <span id="current-lang-label">IT</span> <i class="fa-solid fa-chevron-down ml-1 text-[10px]"></i>
+                    <!-- Language Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center text-darkText hover:text-sage transition focus:outline-none">
+                            <i class="fa-solid fa-globe mr-2"></i>
+                            <span id="current-lang" class="font-medium">IT</span>
                         </button>
-                        <div class="absolute right-0 mt-4 w-32 bg-white border border-gray-100 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden">
-                            <a href="#" onclick="setLanguage('it'); return false;" class="block px-4 py-3 text-sm text-gray-700 hover:text-sage hover:bg-stone transition-colors"><span class="mr-2">🇮🇹</span> Italiano</a>
-                            <a href="#" onclick="setLanguage('en'); return false;" class="block px-4 py-3 text-sm text-gray-700 hover:text-sage hover:bg-stone transition-colors"><span class="mr-2">🇬🇧</span> English</a>
+                        <div class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-stone hover:text-sage"><span class="mr-2">🇮🇹</span> Italiano</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-stone hover:text-sage"><span class="mr-2">🇬🇧</span> English</a>
                         </div>
                     </div>
-
-                    <a href="https://wa.me/39000000000" target="_blank" class="bg-sage text-white px-6 py-2 rounded-full font-semibold uppercase tracking-wider hover:bg-sageDark transition-all transform hover:scale-105 shadow-md text-sm">
-                        WhatsApp
-                    </a>
                 </div>
 
-                <!-- Mobile & iPad Menu Button -->
-                <div class="xl:hidden flex items-center space-x-6">
-                    <div class="relative group" translate="no">
-                        <button class="flex items-center text-gray-600 hover:text-sage text-sm font-bold focus:outline-none" onclick="toggleLangMenuMobile()">
-                            <i class="fa-solid fa-globe text-sage text-xl mr-2"></i> <span id="current-lang-label-mobile" class="font-bold">IT</span>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center space-x-4">
+                    <!-- Mobile Lang -->
+                    <div class="relative" id="mobile-lang-container">
+                        <button id="mobile-lang-btn" class="flex items-center text-darkText focus:outline-none">
+                            <i class="fa-solid fa-globe mr-1"></i> <span class="text-sm">IT</span>
                         </button>
-                        <!-- Mobile Lang Dropdown -->
-                        <div id="mobile-lang-menu" class="absolute right-0 mt-4 w-32 bg-white border border-gray-100 rounded-lg shadow-xl hidden transition-all duration-300 z-[100] overflow-hidden">
-                            <a href="#" onclick="setLanguage('it'); return false;" class="block px-4 py-3 text-sm text-gray-700 hover:text-sage hover:bg-stone transition-colors"><span class="mr-2">🇮🇹</span> Italiano</a>
-                            <a href="#" onclick="setLanguage('en'); return false;" class="block px-4 py-3 text-sm text-gray-700 hover:text-sage hover:bg-stone transition-colors"><span class="mr-2">🇬🇧</span> English</a>
+                        <div id="mobile-lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 border border-gray-100">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-stone">🇮🇹 Italiano</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-stone">🇬🇧 English</a>
                         </div>
                     </div>
-                    <button onclick="toggleMobileMenu()" class="text-darkText hover:text-sage focus:outline-none ml-4">
-                        <i class="fa-solid fa-bars text-3xl"></i>
+                    
+                    <button id="mobile-menu-btn" class="text-darkText hover:text-sage focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile & iPad Menu -->
-        <div id="mobile-menu" class="hidden xl:hidden bg-white border-b border-gray-100 absolute w-full max-h-[80vh] overflow-y-auto z-30 shadow-2xl">
-            <div class="px-4 pt-4 pb-6 space-y-2 flex flex-col items-center">
-                <a href="#" onclick="navigate(event, 'home')" class="block px-3 py-3 text-lg uppercase tracking-widest font-semibold text-gray-700 hover:text-sage">Home</a>
-                <a href="#" onclick="navigate(event, 'services')" class="block px-3 py-3 text-lg uppercase tracking-widest font-semibold text-gray-700 hover:text-sage">Trattamenti</a>
-                <a href="#" onclick="navigate(event, 'about')" class="block px-3 py-3 text-lg uppercase tracking-widest font-semibold text-gray-700 hover:text-sage">Il Centro</a>
-                <a href="#" onclick="navigate(event, 'portfolio')" class="block px-3 py-3 text-lg uppercase tracking-widest font-semibold text-gray-700 hover:text-sage">Lavori</a>
-                <a href="#" onclick="navigate(event, 'contact')" class="block px-3 py-3 text-lg uppercase tracking-widest font-semibold text-gray-700 hover:text-sage">Contatti</a>
-                <a href="#" onclick="navigate(event, 'booking')" class="block px-3 py-3 text-lg uppercase tracking-widest font-semibold text-gray-700 hover:text-sage">Prenota Online</a>
-                <a href="https://wa.me/39000000000" target="_blank" class="mt-6 inline-block bg-beige text-darkText px-8 py-4 rounded-full font-bold uppercase tracking-wider w-[80%] text-center shadow-md">
-                    <i class="fa-brands fa-whatsapp mr-2 text-xl align-middle"></i> Scrivici
-                </a>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#home" class="block px-3 py-4 text-base font-medium text-darkText hover:bg-stone uppercase tracking-wider">Home</a>
+                <a href="#about" class="block px-3 py-4 text-base font-medium text-darkText hover:bg-stone uppercase tracking-wider">Chi Siamo</a>
+                <a href="#services" class="block px-3 py-4 text-base font-medium text-darkText hover:bg-stone uppercase tracking-wider">Servizi</a>
+                <a href="#booking" class="block px-3 py-4 text-base font-medium text-darkText hover:bg-stone uppercase tracking-wider">Prenota Appuntamento</a>
             </div>
         </div>
     </nav>
 
-    <main class="w-full">
-        
-        <div id="page-home" class="page-section block">
-            <section class="relative h-screen flex items-center justify-center overflow-hidden">
-                <div id="hero-media-container">
-                    <!-- Immagine di una spa chiara, naturale, pulita -->
-                    <img id="hero-image" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2000" alt="Spa Naturale">
-                    <div class="absolute inset-0 bg-white/40 z-10"></div> <!-- Overlay chiaro -->
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2000&auto=format&fit=crop" alt="Spa Relax" class="w-full h-full object-cover" />
+            <!-- Soft light overlay -->
+            <div class="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 fade-in max-w-4xl mx-auto mt-16">
+            <h1 class="font-serif text-5xl md:text-7xl text-darkText mb-6 leading-tight">
+                La tua Oasi <br/><span class="italic text-sage">di Benessere</span>
+            </h1>
+            <p class="text-lg md:text-xl text-darkText mb-10 font-light max-w-2xl mx-auto">
+                Trattamenti personalizzati e tecnologie avanzate nel cuore di Tradate.
+            </p>
+            <a href="#services" class="inline-block bg-sage text-white px-10 py-4 text-sm font-medium tracking-widest uppercase hover:bg-sageDark transition shadow-lg rounded-sm">
+                Scopri i Trattamenti
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section & Founder -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <!-- Spa Image -->
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=800&q=80" alt="Interno Centro Estetico" class="rounded-t-full w-full h-[600px] object-cover shadow-xl">
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-beige rounded-full -z-10 hidden md:block"></div>
                 </div>
-                
-                <div class="relative z-20 text-center px-4 max-w-4xl mx-auto mt-20 bg-white/80 p-10 md:p-16 rounded-3xl backdrop-blur-sm shadow-xl border border-white">
-                    <p class="text-sage font-sans uppercase tracking-[0.3em] mb-4 text-sm md:text-base font-semibold">Tradate (VA)</p>
-                    <h1 class="font-serif text-4xl md:text-6xl font-bold mb-6 leading-tight text-darkText">
-                        La tua oasi di<br>
-                        <span class="text-sage italic">Benessere</span>
-                    </h1>
-                    <p class="text-gray-600 mb-10 text-lg md:text-xl font-medium max-w-2xl mx-auto">
-                        Specializzati in estetica di base e avanzata. Trattamenti personalizzati per riscoprire il tuo equilibrio naturale con i prodotti Selenia e Masterbeauty.
+
+                <!-- Text & Founder Profile -->
+                <div>
+                    <h4 class="text-sage font-medium uppercase tracking-widest text-sm mb-3">La Nostra Filosofia</h4>
+                    <h2 class="font-serif text-4xl text-darkText mb-6">Bellezza e Relax su Misura per Te</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed font-light">
+                        Al Centro Estetico Nanni crediamo che ogni persona sia unica. Offriamo percorsi personalizzati di estetica di base e avanzata, utilizzando prodotti d'eccellenza come Selenia e Masterbeauty per garantirti risultati visibili e duraturi.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="#" onclick="navigate(event, 'booking')" class="bg-sage text-white px-8 py-4 rounded-full font-bold uppercase tracking-wider hover:bg-sageDark transition-all transform hover:scale-105 shadow-lg w-full sm:w-auto">
-                            Prenota Appuntamento
-                        </a>
-                        <a href="#" onclick="navigate(event, 'services')" class="border-2 border-sage text-sage px-8 py-4 rounded-full font-bold uppercase tracking-wider hover:bg-stone transition-all w-full sm:w-auto">
-                            Scopri i Servizi
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div id="page-services" class="page-section hidden pt-20">
-            <section class="py-24 bg-stone min-h-screen">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-16">
-                        <p class="text-sage font-sans uppercase tracking-[0.2em] mb-4 text-sm font-semibold">I Nostri Servizi</p>
-                        <h2 class="font-serif text-4xl md:text-5xl font-bold text-darkText">Estetica & Relax</h2>
-                        <div class="w-24 h-1 bg-beige mx-auto mt-6"></div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                        <!-- Category 1 -->
-                        <div class="bg-white p-8 rounded-3xl border border-gray-100 hover:border-sage transition-colors shadow-lg">
-                            <div class="text-sage text-4xl mb-6"><i class="fa-solid fa-leaf"></i></div>
-                            <h3 class="font-serif text-2xl font-bold mb-6 text-darkText border-b border-gray-100 pb-4">Cura del Viso</h3>
-                            <ul class="space-y-4 text-gray-600">
-                                <li class="flex justify-between items-center"><span class="flex-1">Pulizia Viso Profonda</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Trattamento Anti-Age Selenia</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Peeling Illuminante</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Massaggio Viso Rilassante</span></li>
-                            </ul>
-                        </div>
-
-                        <!-- Category 2 -->
-                        <div class="bg-white p-8 rounded-3xl border border-gray-100 hover:border-sage transition-colors shadow-lg">
-                            <div class="text-sage text-4xl mb-6"><i class="fa-solid fa-spa"></i></div>
-                            <h3 class="font-serif text-2xl font-bold mb-6 text-darkText border-b border-gray-100 pb-4">Trattamenti Corpo</h3>
-                            <ul class="space-y-4 text-gray-600">
-                                <li class="flex justify-between items-center"><span class="flex-1">Massaggio Linfodrenante</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Trattamento Anticellulite Masterbeauty</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Scrub Corpo Naturale</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Rituale Relax Schiena</span></li>
-                            </ul>
-                        </div>
-
-                        <!-- Category 3 -->
-                        <div class="bg-white p-8 rounded-3xl border border-gray-100 hover:border-sage transition-colors shadow-lg">
-                            <div class="text-sage text-4xl mb-6"><i class="fa-solid fa-hand-sparkles"></i></div>
-                            <h3 class="font-serif text-2xl font-bold mb-6 text-darkText border-b border-gray-100 pb-4">Manicure & Epilazione</h3>
-                            <ul class="space-y-4 text-gray-600">
-                                <li class="flex justify-between items-center"><span class="flex-1">Manicure e Pedicure Curativo</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Applicazione Semipermanente</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Epilazione Classica Completa</span></li>
-                                <li class="flex justify-between items-center"><span class="flex-1">Epilazione Delicata Viso</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div id="page-about" class="page-section hidden pt-20">
-            <section class="py-24 bg-light min-h-screen">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-16">
-                        <p class="text-sage font-sans uppercase tracking-[0.2em] mb-4 text-sm font-semibold">La Nostra Filosofia</p>
-                        <h2 class="font-serif text-4xl md:text-5xl font-bold text-darkText">Il Centro Estetico</h2>
-                        <div class="w-24 h-1 bg-beige mx-auto mt-6"></div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    
+                    <!-- Founder Card -->
+                    <div class="mt-10 p-6 bg-stone rounded-xl border border-gray-200 flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Annamaria Vitaliti" class="w-20 h-20 rounded-full object-cover shadow-md">
                         <div>
-                            <img src="https://images.unsplash.com/photo-1608283088582-701d547f2022?q=80&w=1000" alt="Interno Spa" class="rounded-3xl shadow-xl border border-gray-100">
-                        </div>
-                        <div>
-                            <h3 class="font-serif text-3xl font-bold text-darkText mb-6">Il tuo rifugio dalla frenesia</h3>
-                            <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                                Il Centro Estetico Nanni nasce con un obiettivo preciso: offrirti una vera e propria oasi di pace nel cuore di Tradate. Ci allontaniamo dal concetto di estetica rapida per abbracciare un approccio olistico e personalizzato.
-                            </p>
-                            <p class="text-gray-600 text-lg leading-relaxed mb-8">
-                                Utilizziamo prodotti di altissima qualità come <strong class="text-sage">Selenia</strong> e <strong class="text-sage">Masterbeauty</strong> per garantire risultati eccellenti sia nell'estetica di base che in quella avanzata, rispettando sempre la natura della tua pelle.
-                            </p>
-                            <a href="#" onclick="navigate(event, 'contact')" class="inline-block bg-beige text-darkText px-8 py-3 rounded-full font-bold uppercase tracking-wider hover:bg-stone shadow-sm transition-all">
-                                Vieni a trovarci
-                            </a>
+                            <h4 class="font-serif text-xl text-darkText">Annamaria Vitaliti</h4>
+                            <p class="text-xs uppercase tracking-wider text-sage mb-2">Fondatrice</p>
+                            <p class="text-gray-600 text-sm font-light italic">"Accogliamo le nostre clienti con gentilezza e professionalità, per offrire sempre un servizio di prima qualità in un ambiente dove sentirsi a casa."</p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
+    </section>
 
-        <div id="page-portfolio" class="page-section hidden pt-20">
-            <section class="py-24 bg-stone min-h-screen">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-16">
-                        <p class="text-sage font-sans uppercase tracking-[0.2em] mb-4 text-sm font-semibold">I Nostri Risultati</p>
-                        <h2 class="font-serif text-4xl md:text-5xl font-bold text-darkText">Galleria</h2>
-                        <div class="w-24 h-1 bg-beige mx-auto mt-6"></div>
-                         <p class="text-gray-500 mt-6 max-w-2xl mx-auto italic text-sm">Immagini segnaposto. Queste verranno sostituite con le foto reali dei vostri lavori e del vostro centro.</p>
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-stone">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl text-darkText mb-4">I Nostri Trattamenti</h2>
+                <p class="text-gray-500 font-light max-w-2xl mx-auto">Scegli tra la nostra selezione di servizi per la cura del corpo e della mente.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" alt="Trattamenti Viso" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="font-serif text-2xl text-darkText mb-3">Estetica Avanzata Viso</h3>
+                        <p class="text-gray-500 text-sm mb-6 font-light">Pulizia profonda, trattamenti anti-age e idratazione intensiva con prodotti Selenia.</p>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=80" alt="Massaggi e Corpo" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="font-serif text-2xl text-darkText mb-3">Rimodellamento Corpo</h3>
+                        <p class="text-gray-500 text-sm mb-6 font-light">Massaggi drenanti, fanghi e tecnologie specifiche per la silhouette perfetta.</p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80" alt="Manicure" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="font-serif text-2xl text-darkText mb-3">Estetica di Base</h3>
+                        <p class="text-gray-500 text-sm mb-6 font-light">Manicure, pedicure curativo, laminazione ed epilazione professionale.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Booking Section -->
+    <section id="booking" class="py-24 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-stone p-8 md:p-12 rounded-2xl shadow-2xl border border-gray-100">
+                <div class="text-center mb-10">
+                    <h2 class="font-serif text-3xl text-darkText mb-2">Prenota il tuo Relax</h2>
+                    <p class="text-gray-500 text-sm font-light">Seleziona data e ora. Ti confermeremo l'appuntamento su WhatsApp.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Date Picker Mockup -->
+                    <div>
+                        <h3 class="font-medium text-darkText mb-4">Scegli il Giorno</h3>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            <div class="flex justify-between items-center mb-4">
+                                <button class="text-gray-400 hover:text-sage"><i class="fa-solid fa-chevron-left"></i></button>
+                                <span class="font-medium text-darkText">Ottobre 2024</span>
+                                <button class="text-gray-400 hover:text-sage"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1 text-center text-xs mb-2 text-gray-400">
+                                <div>L</div><div>M</div><div>M</div><div>G</div><div>V</div><div>S</div><div>D</div>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1 text-center text-sm">
+                                <div class="p-2 text-gray-300">28</div><div class="p-2 text-gray-300">29</div><div class="p-2 text-gray-300">30</div>
+                                <div class="p-2 hover:bg-stone cursor-pointer rounded">1</div><div class="p-2 hover:bg-stone cursor-pointer rounded">2</div>
+                                <div class="p-2 hover:bg-stone cursor-pointer rounded">3</div><div class="p-2 hover:bg-stone cursor-pointer rounded">4</div>
+                                <div class="p-2 bg-sage text-white rounded font-medium shadow-sm">5</div>
+                                <div class="p-2 hover:bg-stone cursor-pointer rounded">6</div><div class="p-2 hover:bg-stone cursor-pointer rounded">7</div>
+                                <!-- Extra days for UI visual -->
+                                <div class="p-2 hover:bg-stone cursor-pointer rounded">8</div><div class="p-2 hover:bg-stone cursor-pointer rounded">9</div>
+                                <div class="p-2 hover:bg-stone cursor-pointer rounded">10</div><div class="p-2 hover:bg-stone cursor-pointer rounded">11</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
-                        <div class="relative group overflow-hidden rounded-2xl aspect-square shadow-md">
-                            <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800&auto=format&fit=crop&q=80" alt="Viso" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-sage/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <p class="text-white font-serif text-xl font-bold text-center px-4">Trattamenti Viso</p>
-                            </div>
-                        </div>
-                        <div class="relative group overflow-hidden rounded-2xl aspect-square shadow-md">
-                            <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=800&auto=format&fit=crop&q=80" alt="Nails" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                             <div class="absolute inset-0 bg-sage/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <p class="text-white font-serif text-xl font-bold text-center px-4">Manicure Curativa</p>
-                            </div>
-                        </div>
-                        <div class="relative group overflow-hidden rounded-2xl aspect-square shadow-md">
-                            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&auto=format&fit=crop&q=80" alt="Massage" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                             <div class="absolute inset-0 bg-sage/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <p class="text-white font-serif text-xl font-bold text-center px-4">Massaggi Relax</p>
-                            </div>
+                    <!-- Time Slots -->
+                    <div>
+                        <h3 class="font-medium text-darkText mb-4">Orari Disponibili</h3>
+                        <div class="grid grid-cols-2 gap-3" id="time-slots">
+                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">09:30</button>
+                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">10:30</button>
+                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">11:00</button>
+                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition text-gray-300 line-through" disabled>14:30</button>
+                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">16:00</button>
+                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">17:30</button>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
 
-        <div id="page-contact" class="page-section hidden pt-20">
-            <section class="bg-light py-24 min-h-screen">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-16">
-                        <p class="text-sage font-sans uppercase tracking-[0.2em] mb-4 text-sm font-semibold">Dove Siamo</p>
-                        <h2 class="font-serif text-4xl md:text-5xl font-bold text-darkText">Contatti</h2>
-                        <div class="w-24 h-1 bg-beige mx-auto mt-6"></div>
+                <div class="mt-8 text-center flex flex-col items-center">
+                    <!-- Standard Online Booking Button -->
+                    <button class="w-full md:w-auto bg-darkText text-white px-10 py-3 rounded text-sm uppercase tracking-widest hover:bg-black transition mb-4">
+                        Conferma Appuntamento
+                    </button>
+                    
+                    <!-- Divider -->
+                    <div class="w-full flex items-center justify-center my-2 max-w-xs">
+                        <div class="h-px bg-gray-300 flex-1"></div>
+                        <span class="px-3 text-xs text-gray-500 uppercase tracking-widest">Oppure</span>
+                        <div class="h-px bg-gray-300 flex-1"></div>
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-                        <div class="bg-white p-8 rounded-3xl shadow-lg text-center">
-                            <i class="fa-solid fa-location-dot text-4xl text-beige mb-6"></i>
-                            <h4 class="font-serif text-2xl text-darkText mb-4">Indirizzo</h4>
-                            <p class="text-gray-600 leading-relaxed mb-6">
-                                Via dei Pradacci 3<br>
-                                Tradate (VA), 21049<br>
-                                Italia
-                            </p>
-                            <a href="https://maps.google.com/?q=Via+dei+Pradacci+3+Tradate" target="_blank" class="text-sage hover:text-sageDark transition-colors font-bold text-sm uppercase tracking-wider">Apri Mappa</a>
-                        </div>
-                        
-                        <div class="bg-white p-8 rounded-3xl shadow-lg text-center">
-                            <i class="fa-regular fa-clock text-4xl text-beige mb-6"></i>
-                            <h4 class="font-serif text-2xl text-darkText mb-4">Orari</h4>
-                            <ul class="space-y-3 text-gray-600">
-                                <li class="flex justify-between border-b border-gray-100 pb-2"><span>Mar - Ven</span> <span>09:00 - 19:00</span></li>
-                                <li class="flex justify-between border-b border-gray-100 pb-2"><span>Sabato</span> <span>09:00 - 17:00</span></li>
-                                <li class="flex justify-between pb-2 text-sage font-bold"><span>Lun & Dom</span> <span>Chiuso</span></li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 rounded-3xl shadow-lg text-center">
-                            <i class="fa-brands fa-whatsapp text-4xl text-beige mb-6"></i>
-                            <h4 class="font-serif text-2xl text-darkText mb-4">Scrivici</h4>
-                            <p class="text-gray-600 mb-6">Per info sui trattamenti o per prenotare, contattaci su WhatsApp.</p>
-                            <a href="https://wa.me/39000000000" target="_blank" class="inline-block bg-sage text-white px-6 py-3 rounded-full font-bold uppercase tracking-wider hover:bg-sageDark transition-colors shadow-md">
-                                Invia Messaggio
-                            </a>
-                        </div>
-                    </div>
+                    
+                    <!-- Direct WhatsApp Button -->
+                    <a href="https://wa.me/393474381583" target="_blank" class="w-full md:w-auto bg-[#25D366] text-white px-10 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-[#20b858] transition flex items-center justify-center shadow-md mt-4">
+                        <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Prenota via WhatsApp
+                    </a>
                 </div>
-            </section>
+            </div>
         </div>
-        
-        <div id="page-booking" class="page-section hidden pt-20">
-            <section class="bg-stone py-24 min-h-screen">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-16">
-                        <p class="text-sage font-sans uppercase tracking-[0.2em] mb-4 text-sm font-semibold">Organizza il tuo relax</p>
-                        <h2 class="font-serif text-4xl md:text-5xl font-bold text-darkText">Prenota Online</h2>
-                        <div class="w-24 h-1 bg-beige mx-auto mt-6"></div>
-                        <p class="text-gray-500 mt-6 max-w-2xl mx-auto text-sm italic">(Calendario dimostrativo. Integrabile con Treatwell o Fresha per ricevere prenotazioni dirette dal Vostro sito web!)</p>
-                    </div>
+    </section>
 
-                    <div class="bg-white rounded-3xl overflow-hidden shadow-xl mx-auto max-w-4xl border border-gray-100 flex flex-col md:flex-row">
-                        <div class="w-full md:w-1/2 p-8 md:p-10 bg-light">
-                            <h3 class="text-2xl font-serif font-bold text-darkText mb-8 text-center md:text-left">Scegli la Data</h3>
-                            <div class="grid grid-cols-7 gap-3 text-center mb-4">
-                                <div class="font-bold text-gray-400 text-xs uppercase">Lu</div>
-                                <div class="font-bold text-gray-400 text-xs uppercase">Ma</div>
-                                <div class="font-bold text-gray-400 text-xs uppercase">Me</div>
-                                <div class="font-bold text-gray-400 text-xs uppercase">Gi</div>
-                                <div class="font-bold text-gray-400 text-xs uppercase">Ve</div>
-                                <div class="font-bold text-gray-400 text-xs uppercase">Sa</div>
-                                <div class="font-bold text-gray-400 text-xs uppercase">Do</div>
-                            </div>
-                            <div class="grid grid-cols-7 gap-3 text-center font-medium text-darkText">
-                                <div class="py-2 text-gray-300">28</div><div class="py-2 text-gray-300">29</div><div class="py-2 text-gray-300">30</div>
-                                <div class="py-2 rounded-full cursor-pointer hover:bg-beige hover:text-darkText transition-colors">1</div>
-                                <div class="py-2 rounded-full cursor-pointer hover:bg-beige hover:text-darkText transition-colors">2</div>
-                                <div class="py-2 rounded-full cursor-pointer hover:bg-beige hover:text-darkText transition-colors">3</div>
-                                <div class="py-2 rounded-full text-gray-300">4</div>
-                                <div class="py-2 rounded-full text-gray-300">5</div>
-                                <div class="py-2 rounded-full cursor-pointer hover:bg-beige hover:text-darkText transition-colors">6</div>
-                                <div class="py-2 bg-sage text-white rounded-full cursor-pointer shadow-md transform scale-110">7</div>
-                                <div class="py-2 rounded-full cursor-pointer hover:bg-beige hover:text-darkText transition-colors">8</div>
-                                <div class="py-2 rounded-full cursor-pointer hover:bg-beige hover:text-darkText transition-colors">9</div>
-                                <div class="py-2 rounded-full cursor-pointer hover:bg-beige hover:text-darkText transition-colors">10</div>
-                                <div class="py-2 rounded-full text-gray-300">11</div>
-                            </div>
-                        </div>
-                        
-                        <div class="w-full md:w-1/2 p-8 md:p-10 bg-white border-t md:border-t-0 md:border-l border-gray-100 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-2xl font-serif font-bold text-darkText mb-8 text-center md:text-left">Orari Disponibili</h3>
-                                <div class="grid grid-cols-2 gap-4 mb-8">
-                                    <button class="border border-gray-200 text-gray-600 hover:border-sage hover:text-sage py-3 rounded-xl font-semibold transition-all">09:30</button>
-                                    <button class="border border-gray-200 text-gray-600 hover:border-sage hover:text-sage py-3 rounded-xl font-semibold transition-all">11:00</button>
-                                    <button class="border-2 border-sage bg-sage text-white shadow-md py-3 rounded-xl font-bold transition-all transform scale-105">14:00</button>
-                                    <button class="border border-gray-200 text-gray-600 hover:border-sage hover:text-sage py-3 rounded-xl font-semibold transition-all">15:30</button>
-                                    <button class="border border-gray-200 text-gray-600 hover:border-sage hover:text-sage py-3 rounded-xl font-semibold transition-all">17:00</button>
-                                    <button class="border border-gray-200 text-gray-600 hover:border-sage hover:text-sage py-3 rounded-xl font-semibold transition-all">18:00</button>
-                                </div>
-                            </div>
-                            <button class="w-full bg-darkText text-white py-4 rounded-full font-bold uppercase tracking-wider hover:bg-sage transition-colors shadow-lg">
-                                Conferma 
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Promo Popup Modal -->
-    <div id="promo-popup" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-500 px-4">
-        <div class="bg-white border border-beige rounded-3xl p-8 md:p-12 text-center relative overflow-hidden shadow-2xl max-w-lg w-full transform scale-95 transition-transform duration-500" id="promo-content">
-            <button onclick="closePromoPopup()" class="absolute top-4 right-4 text-gray-400 hover:text-darkText transition-colors z-20 focus:outline-none">
-                <i class="fa-solid fa-xmark text-3xl"></i>
+    <!-- Special Offer Popup -->
+    <div id="promo-popup" class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center hidden backdrop-blur-sm">
+        <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full mx-4 overflow-hidden relative">
+            <button id="close-popup" class="absolute top-4 right-4 text-gray-400 hover:text-darkText z-10 focus:outline-none">
+                <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-            
-            <div class="absolute top-0 left-0 w-full h-2 bg-sage"></div>
-            
-            <div class="relative z-10 mt-4">
-                <p class="text-sage uppercase tracking-widest mb-2 font-bold text-xs">Offerta Benvenuto</p>
-                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4 text-darkText">Pacchetto Detox</h2>
-                
-                <div class="my-6 bg-stone p-6 rounded-2xl border border-gray-100">
-                    <div class="text-5xl font-serif font-bold text-sage mb-2">-20%</div>
-                    <div class="text-gray-600 font-medium">Sul tuo primo trattamento Viso o Corpo</div>
+            <div class="h-40 bg-sage relative">
+                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Detox" class="w-full h-full object-cover mix-blend-overlay opacity-50">
+                <div class="absolute inset-0 flex items-center justify-center text-white text-center flex-col">
+                    <h3 class="font-serif text-3xl mb-1">Offerta di Benvenuto</h3>
                 </div>
-                
-                <p class="text-gray-600 mb-8 text-sm md:text-base">
-                    Lasciati coccolare. Prenota oggi il tuo appuntamento per usufruire dello sconto riservato ai nuovi clienti online.
-                </p>
-                <a href="https://wa.me/39000000000" target="_blank" onclick="closePromoPopup()" class="inline-block w-full bg-sage text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-sageDark transition-colors shadow-md">
-                    Richiedi Sconto
+            </div>
+            <div class="p-8 text-center">
+                <h4 class="text-xl font-medium text-darkText mb-2">Pacchetto Detox Viso & Corpo</h4>
+                <p class="text-gray-500 text-sm mb-6">Trattamento purificante completo per rigenerare la pelle. Un'ora e mezza di puro relax.</p>
+                <div class="text-3xl font-serif text-sage mb-6">€ 75 <span class="text-sm text-gray-400 line-through block md:inline md:ml-2">Invece di € 110</span></div>
+                <a href="https://wa.me/393474381583?text=Salve,%20vorrei%20prenotare%20il%20Pacchetto%20Detox%20Visto%20dal%20sito!" target="_blank" class="block w-full bg-sage text-white py-3 rounded uppercase tracking-widest text-sm hover:bg-sageDark transition font-medium">
+                    Prenota Subito
                 </a>
+                <p class="text-xs text-gray-400 mt-4">*Valido solo per le nuove clienti</p>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-white py-8 border-t border-gray-100" translate="no">
+    <footer class="bg-darkText text-white pt-16 pb-8 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">
-                    &copy; 2024 Centro Estetico Nanni. Tutti i diritti riservati. 
-                </p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-sage transition-colors text-xl"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-sage transition-colors text-xl"><i class="fa-brands fa-facebook"></i></a>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="font-serif text-2xl mb-4 text-beige">Nanni</h3>
+                    <p class="text-gray-400 text-sm mb-4 font-light leading-relaxed">
+                        Via dei Pradacci 3<br>
+                        21049 Tradate (VA)
+                    </p>
+                    <a href="https://wa.me/393474381583" target="_blank" class="text-sage hover:text-white transition flex items-center justify-center md:justify-start">
+                        <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> +39 347 438 1583
+                    </a>
                 </div>
+                
+                <!-- Open Hours -->
+                <div>
+                    <h4 class="font-medium text-lg mb-4 tracking-wider">ORARI</h4>
+                    <ul class="text-gray-400 text-sm font-light space-y-2">
+                        <li>Mar - Ven: 09:00 - 19:00</li>
+                        <li>Sabato: 09:00 - 18:00</li>
+                        <li>Dom - Lun: Chiuso</li>
+                    </ul>
+                </div>
+                
+                <!-- Social Links -->
+                <div>
+                    <h4 class="font-medium text-lg mb-4 tracking-wider">SEGUICI</h4>
+                    <div class="flex space-x-4 justify-center md:justify-start">
+                        <a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-sage transition text-white">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-sage transition text-white">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-xs flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2024 Centro Estetico Nanni. Tutti i diritti riservati.</p>
+                <p class="mt-2 md:mt-0">Design con <i class="fa-solid fa-heart text-sage"></i> in Italia</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        function setLanguage(lang) {
-            document.cookie = "googtrans=/it/" + lang + "; path=/";
-            document.cookie = "googtrans=/it/" + lang + "; domain=." + document.domain + "; path=/";
-            window.location.reload();
-        }
-
-        function updateLanguageUI() {
-            const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
-            let currentLang = 'it';
-            if (match && match[1]) {
-                const parts = match[1].split('/');
-                if (parts.length > 2) currentLang = parts[2];
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
             
-            const langLabel = document.getElementById('current-lang-label');
-            const langLabelMobile = document.getElementById('current-lang-label-mobile');
-            if (langLabel) langLabel.innerText = currentLang.toUpperCase();
-            if (langLabelMobile) langLabelMobile.innerText = currentLang.toUpperCase();
-        }
-
-        function navigate(event, pageId) {
-            event.preventDefault();
-            
-            const allPages = document.querySelectorAll('.page-section');
-            allPages.forEach(page => {
-                page.classList.remove('block');
-                page.classList.add('hidden');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                const icon = btn.querySelector('i');
+                if (menu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
             });
-            
-            const targetPage = document.getElementById('page-' + pageId);
-            targetPage.classList.remove('hidden');
-            targetPage.classList.add('block');
-            
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.add('hidden');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-            } else {
-                menu.classList.add('hidden');
-            }
-        }
-        
-        function toggleLangMenuMobile() {
-            const langMenu = document.getElementById('mobile-lang-menu');
-            if (langMenu.classList.contains('hidden')) {
-                langMenu.classList.remove('hidden');
-            } else {
-                langMenu.classList.add('hidden');
-            }
-        }
+            // Close mobile menu on link click
+            const mobileLinks = menu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    btn.querySelector('i').classList.remove('fa-xmark');
+                    btn.querySelector('i').classList.add('fa-bars');
+                });
+            });
 
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-md');
-                navbar.classList.remove('shadow-sm');
-            } else {
-                navbar.classList.remove('shadow-md');
-                navbar.classList.add('shadow-sm');
-            }
-        });
+            // Mobile Language Dropdown Toggle
+            const mobileLangBtn = document.getElementById('mobile-lang-btn');
+            const mobileLangDropdown = document.getElementById('mobile-lang-dropdown');
+            mobileLangBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileLangDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', () => {
+                if(!mobileLangDropdown.classList.contains('hidden')){
+                    mobileLangDropdown.classList.add('hidden');
+                }
+            });
 
-        window.addEventListener('load', function() {
-            updateLanguageUI(); 
+            // Change navbar background on scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 20) {
+                    nav.classList.add('shadow-md');
+                } else {
+                    nav.classList.remove('shadow-md');
+                }
+            });
 
-            setTimeout(() => {
-                const popup = document.getElementById('promo-popup');
-                const content = document.getElementById('promo-content');
-                
-                popup.classList.remove('hidden');
-                popup.classList.add('flex');
-                
-                void popup.offsetWidth; 
-                
-                popup.classList.remove('opacity-0');
-                popup.classList.add('opacity-100');
-                
-                content.classList.remove('scale-95');
-                content.classList.add('scale-100');
-            }, 1500); 
-        });
+            // Time Slot Selection logic
+            const timeSlots = document.querySelectorAll('.time-slot:not([disabled])');
+            timeSlots.forEach(slot => {
+                slot.addEventListener('click', function() {
+                    timeSlots.forEach(s => s.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
 
-        function closePromoPopup() {
+            // Promo Popup Logic
             const popup = document.getElementById('promo-popup');
-            const content = document.getElementById('promo-content');
+            const closeBtn = document.getElementById('close-popup');
             
-            popup.classList.remove('opacity-100');
-            popup.classList.add('opacity-0');
-            
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-            
+            // Show popup after 3 seconds
             setTimeout(() => {
+                popup.classList.remove('hidden');
+            }, 3000);
+
+            // Close popup
+            closeBtn.addEventListener('click', () => {
                 popup.classList.add('hidden');
-                popup.classList.remove('flex');
-            }, 500); 
-        }
+            });
+
+            // Close popup on outside click
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.classList.add('hidden');
+                }
+            });
+        });
     </script>
 </body>
 </html>
