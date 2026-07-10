@@ -36,7 +36,7 @@
         body {
             background-color: #FAFAFA;
             color: #2D3748;
-            overflow-y: scroll;
+            /* Rimosso overflow-y: scroll per forzare ancora meglio l'effetto App */
         }
         
         .glass-nav {
@@ -45,7 +45,7 @@
             -webkit-backdrop-filter: blur(10px);
         }
 
-        /* Gestione Pagine Separate (SPA) */
+        /* Gestione Pagine Separate (SPA) rigorosa */
         .page-section {
             display: none; 
             animation: fadeIn 0.4s ease-in-out;
@@ -59,11 +59,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .service-card, .portfolio-card {
+        .service-card {
             transition: all 0.4s ease;
         }
 
-        .service-card:hover, .portfolio-card:hover {
+        .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(138, 160, 148, 0.15);
         }
@@ -87,7 +87,7 @@
                 <!-- Azioni Destra -->
                 <div class="flex items-center space-x-6">
                     
-                    <!-- Traduttore -->
+                    <!-- Traduttore Magico -->
                     <div class="relative group cursor-pointer" id="lang-container">
                         <div class="flex items-center text-darkText hover:text-sage transition p-2">
                             <i class="fa-solid fa-globe mr-2 text-lg"></i>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
 
-                    <!-- Hamburger Menu -->
+                    <!-- Hamburger Menu Universale -->
                     <button id="mobile-menu-btn" class="text-darkText hover:text-sage focus:outline-none p-2 transition-transform duration-200">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
@@ -169,7 +169,6 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div class="relative">
-                        <!-- Immagine Aggiornata (Lettino Trattamenti Luminoso) -->
                         <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=1000" alt="Cabina Trattamenti Estetici" class="rounded-lg shadow-xl w-full h-[500px] object-cover" />
                         <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-stone rounded-full -z-10 hidden md:block"></div>
                     </div>
@@ -248,19 +247,62 @@
                 <span data-i18n="port_tag" class="text-sage uppercase tracking-widest text-sm font-semibold mb-2 block">Portfolio</span>
                 <h2 data-i18n="port_title" class="text-4xl font-serif text-darkText mb-16">I Nostri <span class="text-sage italic">Lavori</span></h2>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="portfolio-card aspect-square rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?q=80&w=800" alt="Nails Art" class="w-full h-full object-cover">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Card Portfolio 1 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?q=80&w=800" alt="Nails Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img1" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Nail Art & Cura</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
                     </div>
-                    <div class="portfolio-card aspect-square rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1512496015851-a9083842137e?q=80&w=800" alt="Lashes and Face" class="w-full h-full object-cover">
+
+                    <!-- Card Portfolio 2 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=800" alt="Skincare Facial" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img2" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Trattamenti Viso</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
                     </div>
-                    <div class="portfolio-card aspect-square rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800" alt="Body Massage" class="w-full h-full object-cover">
+
+                    <!-- Card Portfolio 3 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800" alt="Body Massage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img3" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Massaggi Relax</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
                     </div>
-                    <div class="portfolio-card aspect-square rounded-xl overflow-hidden shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=800" alt="Skincare Facial" class="w-full h-full object-cover">
+
+                    <!-- Card Portfolio 4 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1512496015851-a9083842137e?q=80&w=800" alt="Lashes and Brows" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img4" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Laminazione Ciglia</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
                     </div>
+
+                    <!-- Card Portfolio 5 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=800" alt="Beauty Tools" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img5" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Estetica Avanzata</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
+                    </div>
+
+                    <!-- Card Portfolio 6 -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer aspect-[4/5] bg-stone">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800" alt="Spa Relax" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkText/90 via-darkText/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <h3 data-i18n="port_img6" class="text-white font-serif text-2xl mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Ambiente Spa</h3>
+                            <div class="w-12 h-1 bg-sage rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -374,7 +416,7 @@
                 </div>
             </div>
 
-            <!-- Footer con Social Piccoli in Basso -->
+            <!-- Footer minimalista posizionato SOLO dentro la pagina contatti -->
             <div class="w-full bg-gray-900 py-6 border-t border-gray-800">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 font-light">
                     <span class="mb-4 md:mb-0">&copy; 2026 @ Centro Estetico Nanni</span>
@@ -419,7 +461,7 @@
     </div>
 
     <script>
-        // DIZIONARIO TRADUZIONI (Vero multilingua)
+        // DIZIONARIO TRADUZIONI (Comprende anche le nuove scritte del Portfolio)
         const i18n = {
             'IT': {
                 'menu_home': 'Home', 'menu_about': 'Chi Siamo', 'menu_services': 'Trattamenti', 'menu_portfolio': 'I Nostri Lavori', 'menu_contact': 'Dove Siamo', 'menu_offer': 'Locandina Offerta', 'menu_book': 'Prenota Ora',
@@ -430,6 +472,7 @@
                 'li_body1': 'Massaggi Relax & Decontratturanti', 'li_body2': 'Linfodrenaggio', 'li_body3': 'Trattamenti Anticellulite', 'li_body4': 'Pressoterapia',
                 'li_base1': 'Manicure & Pedicure Curativo', 'li_base2': 'Smalto Semipermanente', 'li_base3': 'Epilazione Classica', 'li_base4': 'Epilazione Pasta di Zucchero',
                 'port_tag': 'Portfolio', 'port_title': 'I Nostri <span class="text-sage italic">Lavori</span>',
+                'port_img1': 'Nail Art & Cura', 'port_img2': 'Trattamenti Viso', 'port_img3': 'Massaggi Relax', 'port_img4': 'Laminazione Ciglia', 'port_img5': 'Estetica Avanzata', 'port_img6': 'Ambiente Spa',
                 'book_title': 'Prenota il tuo Momento', 'book_p': 'Seleziona data e ora preferita sul nostro calendario intelligente.', 'book_avail': 'Orari Disponibili', 'btn_confirm': 'Conferma Appuntamento', 'book_or': 'Oppure prenota alla vecchia maniera', 'btn_wa': 'Scrivici su WhatsApp',
                 'day_1': 'LUN', 'day_2': 'MAR', 'day_3': 'MER', 'day_4': 'GIO', 'day_5': 'VEN', 'day_6': 'SAB', 'day_7': 'DOM', 'day_2_5': 'Mar - Ven', 'day_7_1': 'Dom - Lun', 'closed': 'Chiuso',
                 'contact_title': 'Vieni a trovarci', 'contact_p': 'Il tuo spazio di relax nel cuore di Tradate.', 'cont_addr': 'INDIRIZZO', 'cont_map': 'Apri Mappa', 'cont_hours': 'ORARI',
@@ -444,6 +487,7 @@
                 'li_body1': 'Relax & Deep Tissue Massages', 'li_body2': 'Lymphatic Drainage', 'li_body3': 'Anti-Cellulite Treatments', 'li_body4': 'Pressotherapy',
                 'li_base1': 'Curative Manicure & Pedicure', 'li_base2': 'Semi-Permanent Polish', 'li_base3': 'Classic Waxing', 'li_base4': 'Sugaring',
                 'port_tag': 'Portfolio', 'port_title': 'Our <span class="text-sage italic">Work</span>',
+                'port_img1': 'Nail Art & Care', 'port_img2': 'Facial Treatments', 'port_img3': 'Relaxing Massages', 'port_img4': 'Lash Lamination', 'port_img5': 'Advanced Aesthetics', 'port_img6': 'Spa Environment',
                 'book_title': 'Book Your Moment', 'book_p': 'Select your preferred date and time on our smart calendar.', 'book_avail': 'Available Times', 'btn_confirm': 'Confirm Appointment', 'book_or': 'Or book the old fashioned way', 'btn_wa': 'Text us on WhatsApp',
                 'day_1': 'MON', 'day_2': 'TUE', 'day_3': 'WED', 'day_4': 'THU', 'day_5': 'FRI', 'day_6': 'SAT', 'day_7': 'SUN', 'day_2_5': 'Tue - Fri', 'day_7_1': 'Sun - Mon', 'closed': 'Closed',
                 'contact_title': 'Come visit us', 'contact_p': 'Your relaxation space in the heart of Tradate.', 'cont_addr': 'ADDRESS', 'cont_map': 'Open Map', 'cont_hours': 'HOURS',
@@ -451,14 +495,13 @@
             }
         };
 
-        // Funzione Traduzione Attiva
         function changeLang(lang) {
             document.getElementById('current-lang').innerText = lang;
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if(i18n[lang] && i18n[lang][key]) {
-                    el.innerHTML = i18n[lang][key]; // innerHTML per mantenere br e span!
+                    el.innerHTML = i18n[lang][key]; 
                 }
             });
         }
@@ -481,7 +524,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Gestione Navigazione a "Stanze"
+            // Gestione Navigazione a Stanze Sigillate
             function navigateToHash() {
                 let hash = window.location.hash.substring(1);
                 if (!hash) hash = 'home';
@@ -494,7 +537,7 @@
                     });
                     
                     target.classList.add('active');
-                    window.scrollTo(0, 0);
+                    window.scrollTo(0, 0); // Torna sempre in alto quando cambi stanza
                 }
 
                 const menu = document.getElementById('mobile-menu');
@@ -509,7 +552,6 @@
             window.addEventListener('hashchange', navigateToHash);
             navigateToHash();
 
-            // Menu Hamburger
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
             
@@ -527,7 +569,6 @@
                 }
             });
 
-            // Popup Logic
             const popup = document.getElementById('offer-popup');
             const popupContent = document.getElementById('popup-content');
             const closePopupBtn = document.getElementById('close-popup');
