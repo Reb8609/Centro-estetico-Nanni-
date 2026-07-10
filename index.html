@@ -1,66 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro Estetico Nanni | La tua Oasi di Benessere a Tradate</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        sage: '#8AA094',      // Verde Salvia Elegante
-                        sageDark: '#6b7d73',  // Verde Salvia Scuro
-                        beige: '#DDC9B4',     // Beige Naturale/Legno
-                        light: '#FAFAFA',     // Bianco Puro
-                        stone: '#F5F5F4',     // Grigio Chiarissimo
-                        darkText: '#2D3748',  // Testo Antracite
-                    },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['Montserrat', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body { background-color: #FAFAFA; color: #2D3748; }
-        html { scroll-behavior: smooth; }
-        
-        .glass-nav {
-            background: rgba(250, 250, 250, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(138, 160, 148, 0.2);
-        }
-
-        .fade-in { animation: fadeIn 1s ease-in forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #FAFAFA; }
-        ::-webkit-scrollbar-thumb { background: #8AA094; border-radius: 4px; }
-        
-        .time-slot.selected {
-            background-color: #8AA094;
-            color: white;
-            border-color: #8AA094;
-        }
-    </style>
+<!-- ... existing code ... -->
 </head>
 <body class="font-sans antialiased">
 
@@ -73,39 +11,21 @@
                     <span class="font-serif text-2xl font-semibold text-darkText tracking-wider">NANNI</span>
                 </div>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-darkText hover:text-sage transition text-sm font-medium uppercase tracking-widest">Home</a>
-                    <a href="#about" class="text-darkText hover:text-sage transition text-sm font-medium uppercase tracking-widest">Chi Siamo</a>
-                    <a href="#services" class="text-darkText hover:text-sage transition text-sm font-medium uppercase tracking-widest">Servizi</a>
-                    <a href="#booking" class="text-darkText hover:text-sage transition text-sm font-medium uppercase tracking-widest">Prenota</a>
-                    
+                <!-- Universal Menu (Hamburger & Lang) -->
+                <div class="flex items-center space-x-6">
                     <!-- Language Dropdown -->
-                    <div class="relative group">
+                    <div class="relative group" id="lang-container">
                         <button class="flex items-center text-darkText hover:text-sage transition focus:outline-none">
-                            <i class="fa-solid fa-globe mr-2"></i>
-                            <span id="current-lang" class="font-medium">IT</span>
+                            <i class="fa-solid fa-globe mr-1"></i>
+                            <span id="current-lang" class="font-medium text-sm">IT</span>
                         </button>
                         <div class="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100">
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-stone hover:text-sage"><span class="mr-2">🇮🇹</span> Italiano</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-stone hover:text-sage"><span class="mr-2">🇬🇧</span> English</a>
                         </div>
                     </div>
-                </div>
 
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center space-x-4">
-                    <!-- Mobile Lang -->
-                    <div class="relative" id="mobile-lang-container">
-                        <button id="mobile-lang-btn" class="flex items-center text-darkText focus:outline-none">
-                            <i class="fa-solid fa-globe mr-1"></i> <span class="text-sm">IT</span>
-                        </button>
-                        <div id="mobile-lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 border border-gray-100">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-stone">🇮🇹 Italiano</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-stone">🇬🇧 English</a>
-                        </div>
-                    </div>
-                    
+                    <!-- Hamburger Button -->
                     <button id="mobile-menu-btn" class="text-darkText hover:text-sage focus:outline-none">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
@@ -113,9 +33,9 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+        <!-- Menu Panel (Tendina) -->
+        <div id="mobile-menu" class="hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center max-w-7xl mx-auto">
                 <a href="#home" class="block px-3 py-4 text-base font-medium text-darkText hover:bg-stone uppercase tracking-wider">Home</a>
                 <a href="#about" class="block px-3 py-4 text-base font-medium text-darkText hover:bg-stone uppercase tracking-wider">Chi Siamo</a>
                 <a href="#services" class="block px-3 py-4 text-base font-medium text-darkText hover:bg-stone uppercase tracking-wider">Servizi</a>
@@ -125,161 +45,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center">
-        <!-- Background Image -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2000&auto=format&fit=crop" alt="Spa Relax" class="w-full h-full object-cover" />
-            <!-- Soft light overlay -->
-            <div class="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
-        </div>
+<!-- ... existing code ... -->
+```
 
-        <!-- Hero Content -->
-        <div class="relative z-10 text-center px-4 fade-in max-w-4xl mx-auto mt-16">
-            <h1 class="font-serif text-5xl md:text-7xl text-darkText mb-6 leading-tight">
-                La tua Oasi <br/><span class="italic text-sage">di Benessere</span>
-            </h1>
-            <p class="text-lg md:text-xl text-darkText mb-10 font-light max-w-2xl mx-auto">
-                Trattamenti personalizzati e tecnologie avanzate nel cuore di Tradate.
-            </p>
-            <a href="#services" class="inline-block bg-sage text-white px-10 py-4 text-sm font-medium tracking-widest uppercase hover:bg-sageDark transition shadow-lg rounded-sm">
-                Scopri i Trattamenti
-            </a>
-        </div>
-    </section>
+Questo blocco aggiorna il bottone WhatsApp sotto al Calendario:
 
-    <!-- About Section & Founder -->
-    <section id="about" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <!-- Spa Image -->
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=800&q=80" alt="Interno Centro Estetico" class="rounded-t-full w-full h-[600px] object-cover shadow-xl">
-                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-beige rounded-full -z-10 hidden md:block"></div>
-                </div>
-
-                <!-- Text & Founder Profile -->
-                <div>
-                    <h4 class="text-sage font-medium uppercase tracking-widest text-sm mb-3">La Nostra Filosofia</h4>
-                    <h2 class="font-serif text-4xl text-darkText mb-6">Bellezza e Relax su Misura per Te</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed font-light">
-                        Al Centro Estetico Nanni crediamo che ogni persona sia unica. Offriamo percorsi personalizzati di estetica di base e avanzata, utilizzando prodotti d'eccellenza come Selenia e Masterbeauty per garantirti risultati visibili e duraturi.
-                    </p>
-                    
-                    <!-- Founder Card -->
-                    <div class="mt-10 p-6 bg-stone rounded-xl border border-gray-200 flex items-start gap-4">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Annamaria Vitaliti" class="w-20 h-20 rounded-full object-cover shadow-md">
-                        <div>
-                            <h4 class="font-serif text-xl text-darkText">Annamaria Vitaliti</h4>
-                            <p class="text-xs uppercase tracking-wider text-sage mb-2">Fondatrice</p>
-                            <p class="text-gray-600 text-sm font-light italic">"Accogliamo le nostre clienti con gentilezza e professionalità, per offrire sempre un servizio di prima qualità in un ambiente dove sentirsi a casa."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-24 bg-stone">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl text-darkText mb-4">I Nostri Trattamenti</h2>
-                <p class="text-gray-500 font-light max-w-2xl mx-auto">Scegli tra la nostra selezione di servizi per la cura del corpo e della mente.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" alt="Trattamenti Viso" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-2xl text-darkText mb-3">Estetica Avanzata Viso</h3>
-                        <p class="text-gray-500 text-sm mb-6 font-light">Pulizia profonda, trattamenti anti-age e idratazione intensiva con prodotti Selenia.</p>
-                    </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=80" alt="Massaggi e Corpo" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-2xl text-darkText mb-3">Rimodellamento Corpo</h3>
-                        <p class="text-gray-500 text-sm mb-6 font-light">Massaggi drenanti, fanghi e tecnologie specifiche per la silhouette perfetta.</p>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80" alt="Manicure" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-8 text-center">
-                        <h3 class="font-serif text-2xl text-darkText mb-3">Estetica di Base</h3>
-                        <p class="text-gray-500 text-sm mb-6 font-light">Manicure, pedicure curativo, laminazione ed epilazione professionale.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Smart Booking Section -->
-    <section id="booking" class="py-24 bg-white relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="bg-stone p-8 md:p-12 rounded-2xl shadow-2xl border border-gray-100">
-                <div class="text-center mb-10">
-                    <h2 class="font-serif text-3xl text-darkText mb-2">Prenota il tuo Relax</h2>
-                    <p class="text-gray-500 text-sm font-light">Seleziona data e ora. Ti confermeremo l'appuntamento su WhatsApp.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Date Picker Mockup -->
-                    <div>
-                        <h3 class="font-medium text-darkText mb-4">Scegli il Giorno</h3>
-                        <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                            <div class="flex justify-between items-center mb-4">
-                                <button class="text-gray-400 hover:text-sage"><i class="fa-solid fa-chevron-left"></i></button>
-                                <span class="font-medium text-darkText">Ottobre 2024</span>
-                                <button class="text-gray-400 hover:text-sage"><i class="fa-solid fa-chevron-right"></i></button>
-                            </div>
-                            <div class="grid grid-cols-7 gap-1 text-center text-xs mb-2 text-gray-400">
-                                <div>L</div><div>M</div><div>M</div><div>G</div><div>V</div><div>S</div><div>D</div>
-                            </div>
-                            <div class="grid grid-cols-7 gap-1 text-center text-sm">
-                                <div class="p-2 text-gray-300">28</div><div class="p-2 text-gray-300">29</div><div class="p-2 text-gray-300">30</div>
-                                <div class="p-2 hover:bg-stone cursor-pointer rounded">1</div><div class="p-2 hover:bg-stone cursor-pointer rounded">2</div>
-                                <div class="p-2 hover:bg-stone cursor-pointer rounded">3</div><div class="p-2 hover:bg-stone cursor-pointer rounded">4</div>
-                                <div class="p-2 bg-sage text-white rounded font-medium shadow-sm">5</div>
-                                <div class="p-2 hover:bg-stone cursor-pointer rounded">6</div><div class="p-2 hover:bg-stone cursor-pointer rounded">7</div>
-                                <!-- Extra days for UI visual -->
-                                <div class="p-2 hover:bg-stone cursor-pointer rounded">8</div><div class="p-2 hover:bg-stone cursor-pointer rounded">9</div>
-                                <div class="p-2 hover:bg-stone cursor-pointer rounded">10</div><div class="p-2 hover:bg-stone cursor-pointer rounded">11</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Time Slots -->
-                    <div>
-                        <h3 class="font-medium text-darkText mb-4">Orari Disponibili</h3>
-                        <div class="grid grid-cols-2 gap-3" id="time-slots">
-                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">09:30</button>
-                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">10:30</button>
-                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">11:00</button>
-                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition text-gray-300 line-through" disabled>14:30</button>
-                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">16:00</button>
-                            <button class="time-slot border border-gray-200 bg-white py-2 rounded-lg text-sm hover:border-sage hover:text-sage transition">17:30</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 text-center flex flex-col items-center">
-                    <!-- Standard Online Booking Button -->
-                    <button class="w-full md:w-auto bg-darkText text-white px-10 py-3 rounded text-sm uppercase tracking-widest hover:bg-black transition mb-4">
-                        Conferma Appuntamento
-                    </button>
-                    
-                    <!-- Divider -->
+```html:Centro Estetico Nanni:index.html
+<!-- ... existing code ... -->
                     <div class="w-full flex items-center justify-center my-2 max-w-xs">
                         <div class="h-px bg-gray-300 flex-1"></div>
                         <span class="px-3 text-xs text-gray-500 uppercase tracking-widest">Oppure</span>
@@ -287,42 +59,37 @@
                     </div>
                     
                     <!-- Direct WhatsApp Button -->
-                    <a href="https://wa.me/393474381583" target="_blank" class="w-full md:w-auto bg-[#25D366] text-white px-10 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-[#20b858] transition flex items-center justify-center shadow-md mt-4">
+                    <a href="https://wa.me/393756330365" target="_blank" class="w-full md:w-auto bg-[#25D366] text-white px-10 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-[#20b858] transition flex items-center justify-center shadow-md mt-4">
                         <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Prenota via WhatsApp
                     </a>
                 </div>
             </div>
         </div>
-    </section>
+<!-- ... existing code ... -->
+```
 
-    <!-- Special Offer Popup -->
-    <div id="promo-popup" class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center hidden backdrop-blur-sm">
-        <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full mx-4 overflow-hidden relative">
-            <button id="close-popup" class="absolute top-4 right-4 text-gray-400 hover:text-darkText z-10 focus:outline-none">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            <div class="h-40 bg-sage relative">
-                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Detox" class="w-full h-full object-cover mix-blend-overlay opacity-50">
-                <div class="absolute inset-0 flex items-center justify-center text-white text-center flex-col">
-                    <h3 class="font-serif text-3xl mb-1">Offerta di Benvenuto</h3>
-                </div>
-            </div>
+Questo blocco aggiorna il bottone WhatsApp nel Popup Offerta:
+
+```html:Centro Estetico Nanni:index.html
+<!-- ... existing code ... -->
             <div class="p-8 text-center">
                 <h4 class="text-xl font-medium text-darkText mb-2">Pacchetto Detox Viso & Corpo</h4>
                 <p class="text-gray-500 text-sm mb-6">Trattamento purificante completo per rigenerare la pelle. Un'ora e mezza di puro relax.</p>
                 <div class="text-3xl font-serif text-sage mb-6">€ 75 <span class="text-sm text-gray-400 line-through block md:inline md:ml-2">Invece di € 110</span></div>
-                <a href="https://wa.me/393474381583?text=Salve,%20vorrei%20prenotare%20il%20Pacchetto%20Detox%20Visto%20dal%20sito!" target="_blank" class="block w-full bg-sage text-white py-3 rounded uppercase tracking-widest text-sm hover:bg-sageDark transition font-medium">
+                <a href="https://wa.me/393756330365?text=Salve,%20vorrei%20prenotare%20il%20Pacchetto%20Detox%20Visto%20dal%20sito!" target="_blank" class="block w-full bg-sage text-white py-3 rounded uppercase tracking-widest text-sm hover:bg-sageDark transition font-medium">
                     Prenota Subito
                 </a>
                 <p class="text-xs text-gray-400 mt-4">*Valido solo per le nuove clienti</p>
             </div>
         </div>
-    </div>
+<!-- ... existing code ... -->
+```
 
-    <!-- Footer -->
-    <footer class="bg-darkText text-white pt-16 pb-8 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+E infine, questo blocco sistema i Contatti in fondo al sito e i link Social:
+*(Nota: ho inserito dei link molto simili ai loro per Instagram e Facebook. Se dovessero essere leggermente diversi tipo con un punto o un trattino in più, ti basterà modificare la scritta verde nel codice)*
+
+```html:Centro Estetico Nanni:index.html
+<!-- ... existing code ... -->
                 <!-- Contact Info -->
                 <div>
                     <h3 class="font-serif text-2xl mb-4 text-beige">Nanni</h3>
@@ -330,8 +97,8 @@
                         Via dei Pradacci 3<br>
                         21049 Tradate (VA)
                     </p>
-                    <a href="https://wa.me/393474381583" target="_blank" class="text-sage hover:text-white transition flex items-center justify-center md:justify-start">
-                        <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> +39 347 438 1583
+                    <a href="https://wa.me/393756330365" target="_blank" class="text-sage hover:text-white transition flex items-center justify-center md:justify-start">
+                        <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> +39 375 633 0365
                     </a>
                 </div>
                 
@@ -339,7 +106,7 @@
                 <div>
                     <h4 class="font-medium text-lg mb-4 tracking-wider">ORARI</h4>
                     <ul class="text-gray-400 text-sm font-light space-y-2">
-                        <li>Mar - Ven: 09:00 - 19:00</li>
+                        <li>Mar - Ven: 09:30 - 19:30</li>
                         <li>Sabato: 09:00 - 18:00</li>
                         <li>Dom - Lun: Chiuso</li>
                     </ul>
@@ -349,41 +116,22 @@
                 <div>
                     <h4 class="font-medium text-lg mb-4 tracking-wider">SEGUICI</h4>
                     <div class="flex space-x-4 justify-center md:justify-start">
-                        <a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-sage transition text-white">
+                        <a href="https://www.instagram.com/centroesteticonannitradate" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-sage transition text-white">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-sage transition text-white">
+                        <a href="https://www.facebook.com/centroestetico.nanni" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-sage transition text-white">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-xs flex flex-col md:flex-row justify-between items-center">
-                <p>&copy; 2024 Centro Estetico Nanni. Tutti i diritti riservati.</p>
-                <p class="mt-2 md:mt-0">Design con <i class="fa-solid fa-heart text-sage"></i> in Italia</p>
-            </div>
-        </div>
-    </footer>
+<!-- ... existing code ... -->
+```
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile Menu Toggle
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-                const icon = btn.querySelector('i');
-                if (menu.classList.contains('hidden')) {
-                    icon.classList.remove('fa-xmark');
-                    icon.classList.add('fa-bars');
-                } else {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-xmark');
-                }
-            });
+Questo blocco pulisce un pezzettino vecchio di Javascript per evitare errori:
 
+```html:Centro Estetico Nanni:index.html
+<!-- ... existing code ... -->
             // Close mobile menu on link click
             const mobileLinks = menu.querySelectorAll('a');
             mobileLinks.forEach(link => {
@@ -394,59 +142,13 @@
                 });
             });
 
-            // Mobile Language Dropdown Toggle
-            const mobileLangBtn = document.getElementById('mobile-lang-btn');
-            const mobileLangDropdown = document.getElementById('mobile-lang-dropdown');
-            mobileLangBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                mobileLangDropdown.classList.toggle('hidden');
-            });
-            document.addEventListener('click', () => {
-                if(!mobileLangDropdown.classList.contains('hidden')){
-                    mobileLangDropdown.classList.add('hidden');
-                }
-            });
-
             // Change navbar background on scroll
             window.addEventListener('scroll', () => {
                 const nav = document.getElementById('navbar');
                 if (window.scrollY > 20) {
-                    nav.classList.add('shadow-md');
-                } else {
-                    nav.classList.remove('shadow-md');
-                }
-            });
+<!-- ... existing code ... -->
+```
 
-            // Time Slot Selection logic
-            const timeSlots = document.querySelectorAll('.time-slot:not([disabled])');
-            timeSlots.forEach(slot => {
-                slot.addEventListener('click', function() {
-                    timeSlots.forEach(s => s.classList.remove('selected'));
-                    this.classList.add('selected');
-                });
-            });
+Fai un bel controllo con la modalità "In incognito" del tuo Safari per vedere il nuovo menù a tendina. È diventato elegantissimo. 
 
-            // Promo Popup Logic
-            const popup = document.getElementById('promo-popup');
-            const closeBtn = document.getElementById('close-popup');
-            
-            // Show popup after 3 seconds
-            setTimeout(() => {
-                popup.classList.remove('hidden');
-            }, 3000);
-
-            // Close popup
-            closeBtn.addEventListener('click', () => {
-                popup.classList.add('hidden');
-            });
-
-            // Close popup on outside click
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    popup.classList.add('hidden');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+Sei pronta ad attaccare su Tradate? Prepariamo il tuo messaggio di vendita in puro stile brianzolo/lombardo per Annamaria?
